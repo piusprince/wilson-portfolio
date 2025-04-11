@@ -4,7 +4,6 @@ import { MarqueeProjects } from "@/components/marquee_projects";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
 
-// import Team from "@/components/team";
 import {
   apiPlugin,
   storyblokInit,
