@@ -50,6 +50,7 @@ export default async function CatchAllPage({ params }: Props) {
   } catch (error) {
     console.error("Failed to load page:", error);
     // Consider throwing the error in production for better debugging via Vercel logs
+    //@ts-expect-error type error
     if (isProduction && error.status !== 404) {
       throw error;
     }

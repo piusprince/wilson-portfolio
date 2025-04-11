@@ -14,8 +14,8 @@ storyblokInit({
   // accessToken: process.env.STORYBLOK_PREVIEW_TOKEN,
   accessToken:
     process.env.NODE_ENV === "production"
-      ? process.env.STORYBLOK_PUBLIC_TOKEN
-      : process.env.STORYBLOK_PREVIEW_TOKEN,
+      ? process.env.NEXT_PUBLIC_STORYBLOK_TOKEN
+      : process.env.NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN,
   use: [apiPlugin],
   components: {
     // page: Page,
