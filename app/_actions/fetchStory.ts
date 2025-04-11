@@ -12,9 +12,9 @@ export async function fetchStory({
 }): Promise<ISbResponseData> {
   const api = getStoryblokApi();
 
-  if (!api) {
-    throw new Error("Storyblok API client is not available");
-  }
+  // if (!api) {
+  //   throw new Error("Storyblok API client is not available");
+  // }
 
   console.log({ slug, params });
 
