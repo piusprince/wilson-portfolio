@@ -6,9 +6,13 @@ import {
 interface PageTemplateProps {
   blok: {
     _uid: string;
+    //eslint-disable-next-line
     body: any[];
+    //eslint-disable-next-line
     hero_section?: any[];
+    //eslint-disable-next-line
     contact?: any[];
+    //eslint-disable-next-line
     [key: string]: any;
   };
 }
