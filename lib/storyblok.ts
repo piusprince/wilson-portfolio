@@ -11,7 +11,7 @@ import {
 } from "@storyblok/react/rsc";
 
 storyblokInit({
-  accessToken: process.env.NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN,
+  accessToken: process.env.STORYBLOK_PREVIEW_TOKEN,
   use: [apiPlugin],
   components: {
     // page: Page,
