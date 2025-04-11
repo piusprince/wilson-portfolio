@@ -16,6 +16,8 @@ export async function fetchStory({
     throw new Error("Storyblok API client is not available");
   }
 
+  console.log({ slug, params });
+
   const fullSlug = slug.startsWith("cdn/stories")
     ? slug
     : `cdn/stories/${slug}`;

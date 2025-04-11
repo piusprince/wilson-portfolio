@@ -17,6 +17,8 @@ export default async function CatchAllPage({ params }: Props) {
   // Convert the slug to a path string
   const fullSlug = (await params).slug ? (await params).slug.join("/") : "home";
 
+  console.log("Full slug:", { fullSlug });
+
   try {
     let storyData = await fetchStory({
       slug: `cdn/stories/${fullSlug}`,
