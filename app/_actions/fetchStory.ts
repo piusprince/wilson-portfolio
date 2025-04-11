@@ -21,10 +21,7 @@ export async function fetchStory({
       ? slug
       : `cdn/stories/${slug}`;
 
-    const response = await api.get(fullSlug, params, {
-      cache:
-        process.env.NODE_ENV === "development" ? "no-store" : "force-cache",
-    });
+    const response = await api.get(fullSlug, params);
 
     if (!response?.data) {
       throw new Error("No data received from Storyblok");
