@@ -17,9 +17,6 @@ storyblokInit({
       ? process.env.STORYBLOK_PUBLIC_TOKEN
       : process.env.STORYBLOK_PREVIEW_TOKEN,
   use: [apiPlugin],
-  apiOptions: {
-    region: "eu",
-  },
   components: {
     // page: Page,
     // navbar: Navbar,

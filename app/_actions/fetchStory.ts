@@ -29,7 +29,7 @@ export async function fetchStory({
 
     return response.data;
   } catch (error) {
-    console.error("Storyblok API Error:", error);
+    console.error("Storyblok API Error:", { error, env: process.env.NODE_ENV });
     throw error;
   }
 }
