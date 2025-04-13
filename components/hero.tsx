@@ -1,6 +1,12 @@
+"use client";
+
 import React from "react";
 
-import { convertAttributesInElement, richTextResolver } from "@storyblok/react";
+import {
+  convertAttributesInElement,
+  richTextResolver,
+  storyblokEditable,
+} from "@storyblok/react";
 import { Button } from "@/components/ui/button";
 import { StarShape1, StarShape2 } from "@/components/ui/icons";
 import { options } from "@/lib/richtextUtils";
@@ -45,7 +51,12 @@ export const Hero = ({ blok }: HeroProps) => {
   const linkName = link[0]?.name || "Contact Me";
 
   return (
-    <section className="w-full min-h-[80vh] flex items-center justify-center py-12 md:py-24 relative overflow-hidden">
+    <section
+      {...storyblokEditable(blok)}
+      data-testid="hero"
+      id={blok._uid}
+      className="w-full min-h-[80vh] flex items-center justify-center py-12 md:py-24 relative overflow-hidden"
+    >
       {with_svg && (
         <>
           <div className="absolute top-10 right-10 md:top-20 md:right-20 lg:top-24 lg:right-32 w-24 h-24 md:w-32 md:h-32">
