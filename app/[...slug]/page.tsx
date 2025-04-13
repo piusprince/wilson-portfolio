@@ -5,6 +5,7 @@ import {
   StoryblokServerComponent,
 } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
 // import { preprocessStory } from "@/lib/pageTemplateUtils";
 
 interface Props {
@@ -17,14 +18,15 @@ export default async function CatchAllPage({ params }: Props) {
   // Convert the slug to a path string
   const fullSlug = (await params).slug ? (await params).slug.join("/") : "home";
   const isProduction = process.env.NODE_ENV === "production";
+  const isDraftMode = (await draftMode()).isEnabled;
 
-  console.log("Full slug:", { fullSlug });
+  console.log({ isDraftMode });
 
   try {
     let storyData = await fetchStory({
       slug: `cdn/stories/${fullSlug}`,
       params: {
-        version: isProduction ? "published" : "draft",
+        version: isDraftMode ? "draft" : isProduction ? "published" : "draft",
       },
     });
 
@@ -43,9 +45,11 @@ export default async function CatchAllPage({ params }: Props) {
     }
 
     return (
-      <main {...storyblokEditable(story.content)}>
-        <StoryblokServerComponent blok={story.content} />
-      </main>
+      <>
+        <main {...storyblokEditable(story.content)}>
+          <StoryblokServerComponent blok={story.content} />
+        </main>
+      </>
     );
   } catch (error) {
     console.error("Failed to load page:", error);
@@ -66,7 +70,6 @@ export async function generateMetadata({ params }: Props) {
     const storyData = await fetchStory({
       slug: `cdn/stories/${fullSlug}`,
       params: {
-        // Use 'published' in production, 'draft' otherwise
         version: isProduction ? "published" : "draft",
       },
     });
@@ -89,9 +92,3 @@ export async function generateMetadata({ params }: Props) {
     };
   }
 }
-
-// export async function generateStaticParams() {
-//   // You can add known routes here, like:
-//   // return [{ slug: ["shop-de"] }, { slug: [] }];
-//   return [];
-// }
