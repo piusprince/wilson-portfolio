@@ -6,7 +6,7 @@ import {
 } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { fetchHeader } from "../_actions/fetchHeader";
+import { fetchHeader, StoryblokVersion } from "../_actions/fetchHeader";
 import Navigation from "@/components/navigation";
 import { fetchFooter } from "../_actions/fetchFooter";
 import Footer from "@/components/footer";
@@ -21,8 +21,20 @@ export default async function CatchAllPage({ params }: Props) {
   const fullSlug = (await params).slug ? (await params).slug.join("/") : "home";
   const isProduction = process.env.NODE_ENV === "production";
   const isDraftMode = (await draftMode()).isEnabled;
-  const headerData = await fetchHeader();
-  const footerData = await fetchFooter();
+  const headerData = await fetchHeader({
+    version: isDraftMode
+      ? StoryblokVersion.DRAFT
+      : isProduction
+      ? StoryblokVersion.PUBLISHED
+      : StoryblokVersion.DRAFT,
+  });
+  const footerData = await fetchFooter({
+    version: isDraftMode
+      ? StoryblokVersion.DRAFT
+      : isProduction
+      ? StoryblokVersion.PUBLISHED
+      : StoryblokVersion.DRAFT,
+  });
 
   try {
     let storyData = await fetchStory({
