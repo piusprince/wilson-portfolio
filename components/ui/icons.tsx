@@ -1,6 +1,9 @@
-export const StarShape1 = () => {
+import { SVGProps } from "react";
+
+export const StarShape1 = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="133"
       height="133"
@@ -18,9 +21,10 @@ export const StarShape1 = () => {
   );
 };
 
-export const StarShape2 = () => {
+export const StarShape2 = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="173"
       height="173"
@@ -38,9 +42,10 @@ export const StarShape2 = () => {
   );
 };
 
-export const Logo = () => {
+export const Logo = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width="49"
