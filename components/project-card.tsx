@@ -165,7 +165,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                   />
                 </div>
               )}
-              <h2 className="text-xl font-medium">{project_name}</h2>
+              <h2 className="text-xl font-medium text-white">{project_name}</h2>
             </div>
             <span className="text-sm opacity-80">{project_year}</span>
           </div>
