@@ -6,7 +6,10 @@ import {
 } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-// import { preprocessStory } from "@/lib/pageTemplateUtils";
+import { fetchHeader } from "../_actions/fetchHeader";
+import Navigation from "@/components/navigation";
+import { fetchFooter } from "../_actions/fetchFooter";
+import Footer from "@/components/footer";
 
 interface Props {
   params: Promise<{
@@ -15,12 +18,11 @@ interface Props {
 }
 
 export default async function CatchAllPage({ params }: Props) {
-  // Convert the slug to a path string
   const fullSlug = (await params).slug ? (await params).slug.join("/") : "home";
   const isProduction = process.env.NODE_ENV === "production";
   const isDraftMode = (await draftMode()).isEnabled;
-
-  console.log({ isDraftMode });
+  const headerData = await fetchHeader();
+  const footerData = await fetchFooter();
 
   try {
     let storyData = await fetchStory({
@@ -30,7 +32,6 @@ export default async function CatchAllPage({ params }: Props) {
       },
     });
 
-    // Only preprocess if needed for the specific template type
     if (
       storyData.story?.content?.component === "homepage_template" ||
       storyData.story?.content?.component === "page_template"
@@ -46,9 +47,18 @@ export default async function CatchAllPage({ params }: Props) {
 
     return (
       <>
-        <main {...storyblokEditable(story.content)}>
+        {headerData && fullSlug !== "configs/header" && (
+          <Navigation blok={headerData.story.content} />
+        )}
+        <main
+          className="container mx-auto"
+          {...storyblokEditable(story.content)}
+        >
           <StoryblokServerComponent blok={story.content} />
         </main>
+        {footerData && fullSlug !== "configs/footer" && (
+          <Footer blok={footerData.story.content} />
+        )}
       </>
     );
   } catch (error) {
@@ -82,7 +92,7 @@ export async function generateMetadata({ params }: Props) {
 
     return {
       title: story.name || "Storyblok Page",
-      description: story.content?.description || "",
+      description: story.content?.description ?? "",
     };
   } catch (error) {
     console.error("Error fetching metadata:", error);
