@@ -1,5 +1,7 @@
+import Footer from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { MarqueeProjects } from "@/components/marquee_projects";
+import Navigation from "@/components/navigation";
 // import Navbar from "@/components/Navbar";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
@@ -22,6 +24,8 @@ storyblokInit({
     hero: Hero,
     marquee_projects: MarqueeProjects,
     project: ProjectCard,
+    navigation: Navigation,
+    footer: Footer,
     // team_overview: Team,
     homepage_template: PageTemplate,
     page_template: PageTemplate,
