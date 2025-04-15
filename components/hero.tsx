@@ -70,7 +70,7 @@ export const Hero = ({ blok }: HeroProps) => {
 
       <div className="container px-4 md:px-6 max-w-3xl">
         <div className="flex flex-col items-center text-center space-y-8">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter">
+          <h1 className="text-4xl text-black md:text-5xl lg:text-6xl font-bold tracking-tighter">
             {tagline}
           </h1>
 
