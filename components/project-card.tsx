@@ -251,26 +251,32 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
           </div>
 
           <div className="space-y-6">
-            <div>
-              <h3 className="text-sm font-medium mb-2">Role</h3>
-              <p className="text-sm">{role}</p>
-            </div>
+            {role && (
+              <>
+                <h3 className="text-sm font-medium mb-2">Role</h3>
+                <p className="text-sm">{role}</p>
+              </>
+            )}
 
-            <div>
-              <h3 className="text-sm font-medium mb-2">Skills</h3>
-              <ul className="space-y-1">
-                {skills.map((skill, index) => (
-                  <li key={index} className="text-sm flex items-center gap-1">
-                    <span className="text-xs">+</span> {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {skills && skills.length > 0 && (
+              <>
+                <h3 className="text-sm font-medium mb-2">Skills</h3>
+                <ul className="space-y-1">
+                  {skills.map((skill, index) => (
+                    <li key={index} className="text-sm flex items-center gap-1">
+                      <span className="text-xs">+</span> {skill}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
 
-            <div>
-              <h3 className="text-sm font-medium mb-2">Team</h3>
-              {team && formattedTeamMembers}
-            </div>
+            {team && (
+              <>
+                <h3 className="text-sm font-medium mb-2">Team</h3>
+                {team && formattedTeamMembers}
+              </>
+            )}
           </div>
         </div>
       </div>
