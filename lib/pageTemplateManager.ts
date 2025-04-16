@@ -18,18 +18,18 @@ export const processPageTemplate = (story: any): any => {
     content.body = [];
   }
 
-  if (content.hero_section && content.hero_section.length > 0) {
+  if (content.intro && content.intro.length > 0) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const heroItemsToAdd = content.hero_section.filter((heroItem: any) => {
+    const introItemsToAdd = content.intro.filter((introItem: any) => {
       return !content.body.some(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (bodyItem: any) => bodyItem._uid === heroItem._uid
+        (bodyItem: any) => bodyItem._uid === introItem._uid
       );
     });
 
-    content.body = [...heroItemsToAdd, ...content.body];
+    content.body = [...introItemsToAdd, ...content.body];
 
-    content._processed_hero = true;
+    content._processed_intro = true;
   }
 
   return processedStory;
