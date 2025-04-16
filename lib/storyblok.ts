@@ -1,10 +1,13 @@
+import CaseStudyIntro from "@/components/case-study-intro";
 import Footer from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { ImageAtom } from "@/components/image";
 import { MarqueeProjects } from "@/components/marquee_projects";
 import Navigation from "@/components/navigation";
 // import Navbar from "@/components/Navbar";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
+import { Text } from "@/components/text";
 
 import {
   apiPlugin,
@@ -26,6 +29,9 @@ storyblokInit({
     project: ProjectCard,
     navigation: Navigation,
     footer: Footer,
+    text_component: Text,
+    image_component: ImageAtom,
+    case_study_intro: CaseStudyIntro,
     // team_overview: Team,
     homepage_template: PageTemplate,
     page_template: PageTemplate,
