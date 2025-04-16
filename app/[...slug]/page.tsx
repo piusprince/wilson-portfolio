@@ -53,6 +53,8 @@ export default async function CatchAllPage({ params }: Props) {
 
     const story = storyData.story;
 
+    console.log({ story });
+
     if (!story) {
       return notFound();
     }
