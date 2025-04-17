@@ -3,29 +3,22 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "./ui/icons";
 import { ISbResponse } from "@storyblok/react";
+import { getStoryblokLinkUrl, type StoryblokLink } from "@/lib/utils";
 
 interface LinkItem {
   _uid: string;
-  link: {
-    id: string;
-    url: string;
-    target?: string;
-    linktype: string;
-    fieldtype: string;
-    cached_url: string;
-  };
+  link: StoryblokLink;
   name: string;
   variant: string;
   component: string;
   _editable?: string;
 }
 
-interface NavigationProps {
+type NavigationProps = Readonly<{
   blok: {
     _uid: string;
     logo: string;
@@ -33,7 +26,7 @@ interface NavigationProps {
     component: string;
     _editable?: string;
   } & ISbResponse["data"]["story"]["content"];
-}
+}>;
 
 export default function Navigation({ blok }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +44,6 @@ export default function Navigation({ blok }: NavigationProps) {
         </Link>
       </div>
 
-      {/* Mobile menu */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild className="md:hidden">
           <Button variant="ghost" size="icon">
@@ -64,8 +56,8 @@ export default function Navigation({ blok }: NavigationProps) {
             {blok.links.map((item: LinkItem) => (
               <Link
                 key={item._uid}
-                href={item.link.cached_url || "#"}
-                target={item.link.target || "_self"}
+                href={getStoryblokLinkUrl(item.link)}
+                target={item.link.target ?? "_self"}
                 className="text-lg font-medium hover:underline"
                 onClick={() => setIsOpen(false)}
               >
@@ -80,8 +72,8 @@ export default function Navigation({ blok }: NavigationProps) {
         {blok.links.map((item: LinkItem) => (
           <Link
             key={item._uid}
-            href={item.link.cached_url || "#"}
-            target={item.link.target || "_self"}
+            href={getStoryblokLinkUrl(item.link)}
+            target={item.link.target ?? "_self"}
             className="text-sm font-medium hover:underline"
           >
             {item.name}
