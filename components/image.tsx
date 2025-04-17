@@ -1,13 +1,14 @@
 import { storyblokEditable } from "@storyblok/react";
 import Image from "next/image";
+import clsx from "clsx";
 
-enum ImageSize {
+export enum ImageSize {
   SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",
 }
 
-type ImageProps = {
+export type ImageProps = {
   _uid: string;
   size?: ImageSize;
   image: {
@@ -24,6 +25,7 @@ type ImageProps = {
     is_external_url: boolean;
   };
   component: "image_component";
+  removeMargin?: boolean; // Add this prop to control margin
 };
 
 const getHeightClass = (size?: ImageSize): string => {
@@ -47,7 +49,11 @@ export const ImageAtom = ({ blok }: { blok: ImageProps }) => {
       {...storyblokEditable(blok)}
       data-testid="image"
       id={blok._uid}
-      className={`w-full mb-11 relative overflow-hidden ${heightClass}`}
+      className={clsx(
+        "w-full relative rounded-2xl overflow-hidden",
+        heightClass
+        // !blok.removeMargin && "mb-11"
+      )}
     >
       <Image
         src={blok.image.filename}
