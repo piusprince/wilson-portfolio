@@ -10,20 +10,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { StarShape1, StarShape2 } from "@/components/ui/icons";
 import { options } from "@/lib/richtextUtils";
+import { getStoryblokLinkUrl, type StoryblokLink } from "@/lib/utils";
 
 export type LinkProps = {
   name: string;
-  link: {
-    id: string;
-    url: string;
-    email: string;
-    linktype: string;
-    cached_url: string;
-  };
+  link: StoryblokLink;
   variant?: "primary" | "secondary" | "button_primary" | "button_secondary";
 };
 
-type HeroProps = {
+type HeroProps = Readonly<{
   blok: {
     _uid: string;
     tagline: string;
@@ -32,23 +27,15 @@ type HeroProps = {
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     text: any;
   };
-};
-
-const getLinkUrl = (link: LinkProps["link"]) => {
-  if (link?.linktype === "email") {
-    return `mailto:${link.email}`;
-  }
-  return link?.url;
-};
+}>;
 
 export const Hero = ({ blok }: HeroProps) => {
   const { tagline, with_svg, link, text } = blok;
 
   const html = richTextResolver(options).render(text);
-
   const formattedHtml = convertAttributesInElement(html);
-  const linkUrl = getLinkUrl(link[0]?.link);
-  const linkName = link[0]?.name || "Contact Me";
+  const linkUrl = link?.[0]?.link ? getStoryblokLinkUrl(link[0].link) : "#";
+  const linkName = link?.[0]?.name || "Contact Me";
 
   return (
     <section
