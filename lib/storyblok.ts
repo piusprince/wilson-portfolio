@@ -1,13 +1,14 @@
-import CaseStudyIntro from "@/components/case-study-intro";
+import { CaseStudyIntro } from "@/components/case-study-intro";
 import Footer from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { ImageAtom } from "@/components/image";
 import { MarqueeProjects } from "@/components/marquee_projects";
 import Navigation from "@/components/navigation";
-// import Navbar from "@/components/Navbar";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
 import { Text } from "@/components/text";
+import { TextImage } from "@/components/text_image";
+import { TextMultiImage } from "@/components/text_multi_image";
 
 import {
   apiPlugin,
@@ -22,8 +23,6 @@ storyblokInit({
       : process.env.NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN,
   use: [apiPlugin],
   components: {
-    // page: Page,
-    // navbar: Navbar,
     hero: Hero,
     marquee_projects: MarqueeProjects,
     project: ProjectCard,
@@ -32,7 +31,8 @@ storyblokInit({
     text_component: Text,
     image_component: ImageAtom,
     case_study_intro: CaseStudyIntro,
-    // team_overview: Team,
+    text_image: TextImage,
+    text_multi_image: TextMultiImage,
     homepage_template: PageTemplate,
     page_template: PageTemplate,
   },
