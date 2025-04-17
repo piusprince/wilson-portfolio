@@ -7,6 +7,7 @@ import {
 
 type TextProps = {
   _uid: string;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   text: any;
   component: string;
   _editable?: string;
