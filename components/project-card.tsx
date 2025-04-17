@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, getStoryblokLinkUrl } from "@/lib/utils";
 import {
   convertAttributesInElement,
   richTextResolver,
@@ -22,7 +22,11 @@ export interface ProjectLink {
     cached_url: string;
   };
   name: string;
-  variant: "button_primary" | string;
+  variant:
+    | "button_primary"
+    | "button_secondary"
+    | "link_primary"
+    | "link_secondary";
   component: "link";
   _editable?: string;
 }
@@ -139,6 +143,10 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
     ? convertAttributesInElement(teamMembersHtml)
     : "";
 
+  console.log({ project_link });
+
+  const linkUrl = primaryLink ? getStoryblokLinkUrl(primaryLink.link) : "#";
+
   return (
     <div
       {...storyblokEditable(blok)}
@@ -171,10 +179,9 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
           </div>
 
           <div className="flex flex-wrap gap-2 mb-3">
-            {categories.map((category, index) => (
-              <span key={index} className="text-sm opacity-70">
+            {categories.map((category) => (
+              <span key={`category-${category}`} className="text-sm opacity-70">
                 {category}
-                {index < categories.length - 1 && ", "}
               </span>
             ))}
           </div>
@@ -238,10 +245,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                   className="rounded-full bg-black text-white border-white/20 hover:bg-white/10"
                   asChild
                 >
-                  <a
-                    href={primaryLink.link.url}
-                    className="flex items-center gap-2"
-                  >
+                  <a href={linkUrl} className="flex items-center gap-2">
                     {primaryLink.name}
                     <ChevronRight size={16} />
                   </a>
@@ -262,8 +266,11 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
               <>
                 <h3 className="text-sm font-medium mb-2">Skills</h3>
                 <ul className="space-y-1">
-                  {skills.map((skill, index) => (
-                    <li key={index} className="text-sm flex items-center gap-1">
+                  {skills.map((skill) => (
+                    <li
+                      key={`skill-${skill}`}
+                      className="text-sm flex items-center gap-1"
+                    >
                       <span className="text-xs">+</span> {skill}
                     </li>
                   ))}
