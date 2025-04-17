@@ -2,21 +2,14 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Logo } from "./ui/icons";
 import { ISbResponse } from "@storyblok/react";
+import { getStoryblokLinkUrl, type StoryblokLink } from "@/lib/utils";
 
 interface LinkItem {
   _uid: string;
-  link: {
-    id: string;
-    url: string;
-    target?: string;
-    linktype: string;
-    fieldtype: string;
-    cached_url: string;
-  };
+  link: StoryblokLink;
   name: string;
   variant: string;
   component: string;
@@ -39,7 +32,7 @@ interface SubFooterItem {
   _editable?: string;
 }
 
-interface FooterProps {
+type FooterProps = Readonly<{
   blok: {
     _uid: string;
     link: LinkItem[];
@@ -48,7 +41,7 @@ interface FooterProps {
     component: string;
     _editable?: string;
   } & ISbResponse["data"]["story"]["content"];
-}
+}>;
 
 export default function Footer({ blok }: FooterProps) {
   const currentYear = new Date().getFullYear();
@@ -83,7 +76,7 @@ export default function Footer({ blok }: FooterProps) {
                   asChild
                   className="rounded-full bg-black text-white hover:bg-gray-800"
                 >
-                  <Link href={ctaButton.link.cached_url || "#"}>
+                  <Link href={getStoryblokLinkUrl(ctaButton.link)}>
                     {ctaButton.name}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -107,7 +100,7 @@ export default function Footer({ blok }: FooterProps) {
               {subFooter.links.map((item: LinkItem) => (
                 <Link
                   key={item._uid}
-                  href={item.link.cached_url || "#"}
+                  href={getStoryblokLinkUrl(item.link)}
                   className="text-sm text-gray-600 hover:underline"
                 >
                   {item.name}
