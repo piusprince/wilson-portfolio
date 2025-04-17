@@ -36,7 +36,11 @@ export const CaseStudyIntro = ({ blok }: CaseStudyIntroBlok) => {
   return (
     <div {...storyblokEditable(blok)} className="max-w-3xl mb-[52px]">
       {headlineBlok && (
-        <Headline level={headlineBlok.level} content={headlineBlok.content} />
+        <Headline
+          className="text-black"
+          level={headlineBlok.level}
+          content={headlineBlok.content}
+        />
       )}
       <Text blok={textComponentBlok} />
 

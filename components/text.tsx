@@ -4,6 +4,7 @@ import {
   richTextResolver,
   storyblokEditable,
 } from "@storyblok/react";
+import clsx from "clsx";
 
 type TextProps = {
   _uid: string;
@@ -13,7 +14,13 @@ type TextProps = {
   _editable?: string;
 };
 
-export const Text = ({ blok }: { blok: TextProps }) => {
+export const Text = ({
+  blok,
+  className,
+}: {
+  blok: TextProps;
+  className?: string;
+}) => {
   const html = richTextResolver(options).render(blok.text);
   const formattedHtml = convertAttributesInElement(html);
 
@@ -22,7 +29,7 @@ export const Text = ({ blok }: { blok: TextProps }) => {
       {...storyblokEditable(blok)}
       data-testid="text"
       id={blok._uid}
-      className="w-full relative overflow-hidden"
+      className={clsx("w-full relative overflow-hidden", className)}
     >
       {formattedHtml && (
         <div className="prose prose-lg max-w-none ">{formattedHtml}</div>
