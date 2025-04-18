@@ -6,6 +6,7 @@ import { MarqueeProjects } from "@/components/marquee_projects";
 import Navigation from "@/components/navigation";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
+import Quote from "@/components/quote";
 import { Text } from "@/components/text";
 import TextImageGrid from "@/components/text-image-grid";
 import { TextImage } from "@/components/text_image";
@@ -35,6 +36,7 @@ storyblokInit({
     text_image: TextImage,
     text_multi_image: TextMultiImage,
     text_image_grid: TextImageGrid,
+    quote: Quote,
     homepage_template: PageTemplate,
     page_template: PageTemplate,
   },
