@@ -7,6 +7,7 @@ import Navigation from "@/components/navigation";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
 import { Text } from "@/components/text";
+import TextImageGrid from "@/components/text-image-grid";
 import { TextImage } from "@/components/text_image";
 import { TextMultiImage } from "@/components/text_multi_image";
 
@@ -33,6 +34,7 @@ storyblokInit({
     case_study_intro: CaseStudyIntro,
     text_image: TextImage,
     text_multi_image: TextMultiImage,
+    text_image_grid: TextImageGrid,
     homepage_template: PageTemplate,
     page_template: PageTemplate,
   },
