@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import React from "react";
 import { options } from "@/lib/richtextUtils";
 
-export interface ProjectLink {
+type ProjectLink = {
   _uid: string;
   link: {
     id: string;
@@ -24,9 +24,9 @@ export interface ProjectLink {
   variant: "primary" | "secondary" | "button_primary" | "button_secondary";
   component: "link";
   _editable?: string;
-}
+};
 
-export interface ProjectImage {
+type ProjectImage = {
   _uid: string;
   image: {
     id: number;
@@ -44,26 +44,9 @@ export interface ProjectImage {
   component: "project_image";
   main_image: boolean;
   _editable?: string;
-}
+};
 
-export interface ProjectSummary {
-  type: "doc";
-  content: Array<{
-    type: "paragraph";
-    content: Array<{
-      text: string;
-      type: "text";
-      marks: Array<{
-        type: "textStyle";
-        attrs: {
-          color: string;
-        };
-      }>;
-    }>;
-  }>;
-}
-
-export interface Project {
+type Project = {
   _uid: string;
   role: string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -82,7 +65,7 @@ export interface Project {
   _editable?: string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   [k: string]: any;
-}
+};
 
 export interface ProjectProps {
   blok: Project;
@@ -141,9 +124,9 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
   const linkUrl = primaryLink ? getStoryblokLinkUrl(primaryLink.link) : "#";
 
   return (
-    <div
+    <section
       {...storyblokEditable(blok)}
-      className={`rounded-lg container mx-auto overflow-hidden w-full text-white items-center mb-[90px]`}
+      className={`rounded-lg px-5 overflow-hidden w-full text-white items-center mb-[90px]`}
     >
       <div
         className="w-full mb-6 rounded-lg"
@@ -152,7 +135,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
           color: "white",
         }}
       >
-        <div className="p-6">
+        <div className="px-10 pt-10">
           <div className="flex items-start justify-between mb-2">
             <div className="flex items-center gap-3">
               {mainImage && (
@@ -171,87 +154,102 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
             <span className="text-sm opacity-80">{project_year}</span>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-3">
-            {categories.map((category) => (
-              <span key={`category-${category}`} className="text-sm opacity-70">
-                {category}
-              </span>
-            ))}
+          <div className="flex flex-wrap gap-2">
+            {categories.length > 0 &&
+              categories.map((category) => (
+                <span
+                  key={`category-${category}`}
+                  className="text-sm opacity-70"
+                >
+                  {category}
+                </span>
+              ))}
           </div>
 
-          <p className="mb-6 text-lg font-medium">{project_description}</p>
+          {project_description && (
+            <p className="text-lg font-medium max-w-[741px] mb-11 md:mb-[70px] lg:mb-0">
+              {project_description}
+            </p>
+          )}
         </div>
 
-        <div className="px-6 pb-6 ">
-          <div className="flex gap-2 overflow-x-auto image-gallery">
-            {allImages.map((img, index) => (
-              <div
-                key={img._uid}
-                className={cn(
-                  "h-[400px] rounded-lg overflow-hidden transition-all duration-300 ease-in-out",
-                  img.main_image ? "gallery-item-active" : "gallery-item"
-                )}
-              >
-                <Image
-                  src={img.image.filename || "/placeholder.svg"}
-                  alt={
-                    img.image.alt || `${project_name} screenshot ${index + 1}`
-                  }
-                  width={452}
-                  height={400}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            ))}
+        {allImages.length > 0 && (
+          <div className="px-10 pb-[66px] lg:mb-0 lg:py-10">
+            <div className="flex gap-2 overflow-x-auto image-gallery touch-pan-x">
+              {allImages.map((img, index) => (
+                <div
+                  key={img._uid}
+                  className={cn(
+                    "rounded-lg overflow-hidden transition-all duration-300 ease-in-out",
+                    img.main_image
+                      ? "h-[425px] w-[452px] gallery-item-active"
+                      : "h-[427px] w-[197.2px] gallery-item"
+                  )}
+                >
+                  <Image
+                    src={img.image.filename || "/placeholder.svg"}
+                    alt={
+                      img.image.alt || `${project_name} screenshot ${index + 1}`
+                    }
+                    width={img.main_image ? 452 : 197.2}
+                    height={img.main_image ? 425 : 427}
+                    className="object-cover w-full h-full"
+                    draggable={false}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="text-black bg-white">
-        <div className="px-6 grid grid-cols-1 lg:grid-cols-[871px_274.25px] gap-[103px]">
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium">Summary</h3>
-              <button
-                onClick={() => setSummaryExpanded(!summaryExpanded)}
-                className="text-sm opacity-70 hover:opacity-100"
-              >
-                {summaryExpanded ? "Hide" : "Show"}
-              </button>
-            </div>
-
-            <div
-              className={cn(
-                "transition-all text-base mb-4 duration-300",
-                summaryExpanded
-                  ? "max-h-96 opacity-100"
-                  : "max-h-24 opacity-100 line-clamp-3"
-              )}
-            >
-              {formattedProjectSummary}
-            </div>
-
-            {primaryLink && (
-              <div className="mt-4">
-                <Button variant={primaryLink.variant} asChild>
-                  <a href={linkUrl} className="flex items-center gap-2">
-                    {primaryLink.name}
-                  </a>
-                </Button>
+        <div className="px-6 grid grid-cols-1 lg:grid-cols-[871px_274.25px]">
+          {formattedProjectSummary && (
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-medium">Summary</h3>
+                <button
+                  onClick={() => setSummaryExpanded(!summaryExpanded)}
+                  className="text-sm opacity-70 hover:opacity-100"
+                >
+                  {summaryExpanded ? "Hide" : "Show"}
+                </button>
               </div>
-            )}
-          </div>
+
+              <div
+                className={cn(
+                  "transition-all text-base mb-4 duration-300",
+                  summaryExpanded
+                    ? "max-h-96 opacity-100"
+                    : "max-h-24 opacity-100 line-clamp-3"
+                )}
+              >
+                {formattedProjectSummary}
+              </div>
+
+              {primaryLink && (
+                <div className="mt-4">
+                  <Button variant={primaryLink.variant} asChild>
+                    <a href={linkUrl} className="flex items-center gap-2">
+                      {primaryLink.name}
+                    </a>
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="space-y-6">
             {role && (
-              <>
+              <div>
                 <h3 className="mb-2 text-sm font-medium">Role</h3>
                 <p className="text-sm">{role}</p>
-              </>
+              </div>
             )}
 
             {skills && skills.length > 0 && (
-              <>
+              <div>
                 <h3 className="mb-2 text-sm font-medium">Skills</h3>
                 <ul className="space-y-1">
                   {skills.map((skill) => (
@@ -263,18 +261,18 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                     </li>
                   ))}
                 </ul>
-              </>
+              </div>
             )}
 
-            {team && (
-              <>
+            {formattedTeamMembers && (
+              <div>
                 <h3 className="mb-2 text-sm font-medium">Team</h3>
-                {team && formattedTeamMembers}
-              </>
+                {formattedTeamMembers}
+              </div>
             )}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
