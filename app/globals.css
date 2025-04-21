@@ -95,6 +95,31 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --h1-size-mobile: 2.5rem;    /* 40px */
+  --h1-size-tablet: 3.25rem;   /* 52px */
+  --h1-size-desktop: 4rem;     /* 64px */
+  
+  --h2-size-mobile: 2rem;      /* 32px */
+  --h2-size-tablet: 2.5rem;    /* 40px */
+  --h2-size-desktop: 3rem;     /* 48px */
+  
+  --h3-size-mobile: 1.75rem;   /* 28px */
+  --h3-size-tablet: 2rem;      /* 32px */
+  --h3-size-desktop: 2.5rem;   /* 40px */
+  
+  --h4-size-mobile: 1.5rem;    /* 24px */
+  --h4-size-tablet: 1.75rem;   /* 28px */
+  --h4-size-desktop: 2rem;     /* 32px */
+  
+  --h5-size-mobile: 1.25rem;   /* 20px */
+  --h5-size-tablet: 1.5rem;    /* 24px */
+  --h5-size-desktop: 1.75rem;  /* 28px */
+  
+  --h6-size-mobile: 1rem;      /* 16px */
+  --h6-size-tablet: 1.25rem;   /* 20px */
+  --h6-size-desktop: 1.5rem;   /* 24px */
+
 }
 
 .dark {
