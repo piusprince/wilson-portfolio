@@ -6,7 +6,6 @@ import {
   richTextResolver,
   storyblokEditable,
 } from "@storyblok/react";
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import React from "react";
@@ -22,11 +21,7 @@ export interface ProjectLink {
     cached_url: string;
   };
   name: string;
-  variant:
-    | "button_primary"
-    | "button_secondary"
-    | "link_primary"
-    | "link_secondary";
+  variant: "primary" | "secondary" | "button_primary" | "button_secondary";
   component: "link";
   _editable?: string;
 }
@@ -143,8 +138,6 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
     ? convertAttributesInElement(teamMembersHtml)
     : "";
 
-  console.log({ project_link });
-
   const linkUrl = primaryLink ? getStoryblokLinkUrl(primaryLink.link) : "#";
 
   return (
@@ -160,10 +153,10 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
         }}
       >
         <div className="p-6">
-          <div className="flex justify-between items-start mb-2">
+          <div className="flex items-start justify-between mb-2">
             <div className="flex items-center gap-3">
               {mainImage && (
-                <div className="w-8 h-8 rounded-md overflow-hidden bg-white/10 flex items-center justify-center">
+                <div className="flex items-center justify-center w-8 h-8 overflow-hidden rounded-md bg-white/10">
                   <Image
                     src={mainImage.image.filename || "/placeholder.svg"}
                     alt={mainImage.image.alt || project_name}
@@ -186,7 +179,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
             ))}
           </div>
 
-          <p className="text-lg font-medium mb-6">{project_description}</p>
+          <p className="mb-6 text-lg font-medium">{project_description}</p>
         </div>
 
         <div className="px-6 pb-6 ">
@@ -206,7 +199,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                   }
                   width={452}
                   height={400}
-                  className="w-full h-full object-cover"
+                  className="object-cover w-full h-full"
                 />
               </div>
             ))}
@@ -214,10 +207,10 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
         </div>
       </div>
 
-      <div className="bg-white text-black">
+      <div className="text-black bg-white">
         <div className="px-6 grid grid-cols-1 lg:grid-cols-[871px_274.25px] gap-[103px]">
           <div>
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium">Summary</h3>
               <button
                 onClick={() => setSummaryExpanded(!summaryExpanded)}
@@ -240,14 +233,9 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
 
             {primaryLink && (
               <div className="mt-4">
-                <Button
-                  variant="outline"
-                  className="rounded-full bg-black text-white border-white/20 hover:bg-white/10"
-                  asChild
-                >
+                <Button variant={primaryLink.variant} asChild>
                   <a href={linkUrl} className="flex items-center gap-2">
                     {primaryLink.name}
-                    <ChevronRight size={16} />
                   </a>
                 </Button>
               </div>
@@ -257,19 +245,19 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
           <div className="space-y-6">
             {role && (
               <>
-                <h3 className="text-sm font-medium mb-2">Role</h3>
+                <h3 className="mb-2 text-sm font-medium">Role</h3>
                 <p className="text-sm">{role}</p>
               </>
             )}
 
             {skills && skills.length > 0 && (
               <>
-                <h3 className="text-sm font-medium mb-2">Skills</h3>
+                <h3 className="mb-2 text-sm font-medium">Skills</h3>
                 <ul className="space-y-1">
                   {skills.map((skill) => (
                     <li
                       key={`skill-${skill}`}
-                      className="text-sm flex items-center gap-1"
+                      className="flex items-center gap-1 text-sm"
                     >
                       <span className="text-xs">+</span> {skill}
                     </li>
@@ -280,7 +268,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
 
             {team && (
               <>
-                <h3 className="text-sm font-medium mb-2">Team</h3>
+                <h3 className="mb-2 text-sm font-medium">Team</h3>
                 {team && formattedTeamMembers}
               </>
             )}
