@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Logo } from "./ui/icons";
 import { ISbResponse } from "@storyblok/react";
@@ -51,10 +51,10 @@ export default function Footer({ blok }: FooterProps) {
 
   return (
     <footer className="w-full bg-gray-50">
-      <div className="container mx-auto px-6 py-16 md:px-10">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+      <div className="container px-6 py-16 mx-auto md:px-10">
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row">
           <div className="w-full md:w-auto">
-            <Link href="/" className="font-bold text-2xl">
+            <Link href="/" className="text-2xl font-bold">
               <Logo className="w-[82px] h-[87px]" />
               <span className="sr-only">Home</span>
             </Link>
@@ -62,23 +62,19 @@ export default function Footer({ blok }: FooterProps) {
 
           <div className="flex flex-col items-center md:items-start max-w-[559px]">
             {mainHeadline && (
-              <h2 className="text-2xl text-black md:text-3xl font-bold mb-8 text-center md:text-left">
+              <h2 className="mb-8 text-2xl font-bold text-center text-black md:text-3xl md:text-left">
                 {mainHeadline.content}
               </h2>
             )}
 
             {ctaButton && (
               <div className="relative">
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-full">
-                  <div className="border-t border-dashed border-gray-300 w-full"></div>
+                <div className="absolute w-full transform -translate-x-1/2 -top-8 left-1/2">
+                  <div className="w-full border-t border-gray-300 border-dashed"></div>
                 </div>
-                <Button
-                  asChild
-                  className="rounded-full bg-black text-white hover:bg-gray-800"
-                >
+                <Button asChild>
                   <Link href={getStoryblokLinkUrl(ctaButton.link)}>
                     {ctaButton.name}
-                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
@@ -88,8 +84,8 @@ export default function Footer({ blok }: FooterProps) {
       </div>
 
       <div className="border-t border-gray-200">
-        <div className="container mx-auto px-6 py-4 md:px-10">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="container px-6 py-4 mx-auto md:px-10">
+          <div className="flex flex-col items-center justify-between md:flex-row">
             <div className="mb-4 md:mb-0">
               <p className="text-sm text-gray-600">
                 © {currentYear} {subFooter.name}
