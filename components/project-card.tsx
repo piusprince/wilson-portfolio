@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import React from "react";
 import { options } from "@/lib/richtextUtils";
 
-type ProjectLink = {
+export type ProjectLink = {
   _uid: string;
   link: {
     id: string;
@@ -26,7 +26,7 @@ type ProjectLink = {
   _editable?: string;
 };
 
-type ProjectImage = {
+export type ProjectImage = {
   _uid: string;
   image: {
     id: number;
@@ -46,7 +46,7 @@ type ProjectImage = {
   _editable?: string;
 };
 
-type Project = {
+export type Project = {
   _uid: string;
   role: string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
