@@ -6,20 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./ui/icons";
 import { ISbResponse } from "@storyblok/react";
 import { getStoryblokLinkUrl, type StoryblokLink } from "@/lib/utils";
+import Headline, { HeadlineProps } from "./headline";
 
 interface LinkItem {
   _uid: string;
   link: StoryblokLink;
   name: string;
   variant: string;
-  component: string;
-  _editable?: string;
-}
-
-interface HeadlineItem {
-  _uid: string;
-  level: string;
-  content: string;
   component: string;
   _editable?: string;
 }
@@ -36,7 +29,7 @@ type FooterProps = Readonly<{
   blok: {
     _uid: string;
     link: LinkItem[];
-    headline: HeadlineItem[];
+    headline: HeadlineProps[];
     sub_footer: SubFooterItem[];
     component: string;
     _editable?: string;
@@ -45,7 +38,6 @@ type FooterProps = Readonly<{
 
 export default function Footer({ blok }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const mainHeadline = blok.headline[0];
   const ctaButton = blok.link[0];
   const subFooter = blok.sub_footer[0];
 
@@ -55,25 +47,29 @@ export default function Footer({ blok }: FooterProps) {
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row">
           <div className="w-full md:w-auto">
             <Link href="/" className="text-2xl font-bold">
-              <Logo className="w-[82px] h-[87px]" />
+              <Logo className="w-[47px] h-[47px]  lg:w-[82px] lg:h-[87px]" />
               <span className="sr-only">Home</span>
             </Link>
           </div>
 
-          {(mainHeadline || ctaButton) && (
+          {(blok.headline?.length > 0 || ctaButton) && (
             <div className="flex flex-col items-center md:items-start max-w-[559px]">
-              {mainHeadline?.content && (
-                <h2 className="mb-8 text-2xl font-bold text-center text-black md:text-3xl md:text-left">
-                  {mainHeadline.content}
-                </h2>
+              {blok.headline?.length > 0 && (
+                <div className="mb-4">
+                  {blok.headline.map((item: HeadlineProps) => (
+                    <Headline
+                      key={item._uid}
+                      content={item.content}
+                      level={item.level}
+                      className="text-2xl font-bold text-gray-800"
+                    />
+                  ))}
+                </div>
               )}
 
               {ctaButton?.name && (
                 <div className="relative">
-                  <div className="absolute w-full transform -translate-x-1/2 -top-8 left-1/2">
-                    <div className="w-full border-t border-gray-300 border-dashed"></div>
-                  </div>
-                  <Button asChild>
+                  <Button variant={ctaButton.variant} asChild>
                     <Link href={getStoryblokLinkUrl(ctaButton.link)}>
                       {ctaButton.name}
                     </Link>
@@ -86,31 +82,29 @@ export default function Footer({ blok }: FooterProps) {
       </div>
 
       {subFooter && (
-        <div className="border-t border-gray-200">
-          <div className="container px-6 py-4 mx-auto md:px-10">
-            <div className="flex flex-col items-center justify-between md:flex-row">
-              {subFooter.name && (
-                <div className="mb-4 md:mb-0">
-                  <p className="text-sm text-gray-600">
-                    © {currentYear} {subFooter.name}
-                  </p>
-                </div>
-              )}
+        <div className="container px-6 py-4 mx-auto md:px-10">
+          <div className="flex flex-col items-center justify-between md:flex-row">
+            {subFooter.name && (
+              <div className="mb-4 md:mb-0">
+                <p className="text-sm text-gray-600">
+                  © {currentYear} {subFooter.name}
+                </p>
+              </div>
+            )}
 
-              {subFooter.links?.length > 0 && (
-                <nav className="flex space-x-6">
-                  {subFooter.links.map((item: LinkItem) => (
-                    <Link
-                      key={item._uid}
-                      href={getStoryblokLinkUrl(item.link)}
-                      className="text-sm text-gray-600 hover:underline"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </nav>
-              )}
-            </div>
+            {subFooter.links?.length > 0 && (
+              <nav className="flex space-x-6">
+                {subFooter.links.map((item: LinkItem) => (
+                  <Link
+                    key={item._uid}
+                    href={getStoryblokLinkUrl(item.link)}
+                    className="text-sm text-gray-600 hover:underline"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            )}
           </div>
         </div>
       )}
