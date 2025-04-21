@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import React from "react";
 import { options } from "@/lib/richtextUtils";
+import Link from "next/link";
 
 export type ProjectLink = {
   _uid: string;
@@ -86,15 +87,12 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
     background_color,
   } = blok;
 
-  const mainImage = project_images.find((img) => img.main_image);
+  console.log({ project_link });
 
+  const mainImage = project_images.find((img) => img.main_image);
   const additionalImages = project_images
     .filter((img) => !img.main_image)
     .slice(0, 5);
-
-  const primaryLink = project_link.find(
-    (link) => link.variant === "button_primary"
-  );
 
   const categories = project_category
     .split(",")
@@ -120,8 +118,6 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
   const formattedTeamMembers = teamMembersHtml
     ? convertAttributesInElement(teamMembersHtml)
     : "";
-
-  const linkUrl = primaryLink ? getStoryblokLinkUrl(primaryLink.link) : "#";
 
   return (
     <section
@@ -204,7 +200,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
       </div>
 
       <div className="text-black bg-white">
-        <div className="px-6 grid grid-cols-1 lg:grid-cols-[871px_274.25px]">
+        <div className="grid grid-cols-1 gap-[103px] lg:grid-cols-[871px_274.25px]">
           {formattedProjectSummary && (
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -228,13 +224,26 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                 {formattedProjectSummary}
               </div>
 
-              {primaryLink && (
-                <div className="mt-4">
-                  <Button variant={primaryLink.variant} asChild>
-                    <a href={linkUrl} className="flex items-center gap-2">
-                      {primaryLink.name}
-                    </a>
-                  </Button>
+              {project_link && project_link.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {project_link.map((link) => {
+                    return (
+                      <Link
+                        key={link._uid}
+                        href={getStoryblokLinkUrl(link.link)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button
+                          variant={link.variant}
+                          className="text-sm font-medium"
+                          asChild
+                        >
+                          {link.name}
+                        </Button>
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
             </div>
