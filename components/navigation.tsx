@@ -86,7 +86,10 @@ export default function Navigation({ blok }: NavigationProps) {
                 href={getStoryblokLinkUrl(item.link)}
                 target={item.link.target ?? "_self"}
               >
-                {item.name}
+                <span className="flex items-center gap-1 text-sm font-medium">
+                  {item.name}
+                  <span className="w-1 h-1 bg-white rounded-full"></span>
+                </span>
               </Link>
             </Button>
           ) : (
