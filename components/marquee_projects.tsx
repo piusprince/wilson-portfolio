@@ -39,7 +39,10 @@ export const MarqueeProjects = ({ blok }: MarqueeProjectsProps) => {
     .map(([, value]) => value as MarqueeProject);
 
   return (
-    <div {...storyblokEditable(blok)} className="w-full overflow-hidden py-28">
+    <section
+      {...storyblokEditable(blok)}
+      className="w-full mb-32 overflow-hidden"
+    >
       <Marquee className="py-4" pauseOnHover>
         {projects &&
           projects.length > 0 &&
@@ -47,18 +50,18 @@ export const MarqueeProjects = ({ blok }: MarqueeProjectsProps) => {
             <a
               key={project._uid}
               href={project.link[0]?.link.url}
-              className="mx-4 block"
+              className="block mx-1 sm:mx-2 lg:mx-3"
             >
               <Image
                 src={project.project_image.filename}
                 alt={project.project_image.alt || "Project Image"}
-                width={485}
-                height={336}
-                className="h-auto w-auto object-cover rounded-lg"
+                width={603}
+                height={418}
+                className="h-[170px] w-[245px] sm:h-[336px] sm:w-[485px] lg:h-[418px] lg:w-[603px] object-cover rounded-lg"
               />
             </a>
           ))}
       </Marquee>
-    </div>
+    </section>
   );
 };
