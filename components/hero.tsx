@@ -13,6 +13,7 @@ import { options } from "@/lib/richtextUtils";
 import { getStoryblokLinkUrl, type StoryblokLink } from "@/lib/utils";
 
 export type LinkProps = {
+  _uid?: string;
   name: string;
   link: StoryblokLink;
   variant?: "primary" | "secondary" | "button_primary" | "button_secondary";
