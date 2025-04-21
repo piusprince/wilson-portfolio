@@ -58,13 +58,17 @@ export const Hero = ({ blok }: HeroProps) => {
 
       <div className="container max-w-3xl px-4 md:px-6">
         <div className="flex flex-col items-center gap-2 text-center md:gap-3 lg:gap-4">
-          <h1 className="text-4xl font-semibold tracking-tighter text-black md:text-[3.25rem] lg:text-[5rem]">
-            {tagline}
-          </h1>
+          {tagline && (
+            <h1 className="text-4xl font-semibold tracking-tighter text-black md:text-[3.25rem] lg:text-[5rem]">
+              {tagline}
+            </h1>
+          )}
 
-          <div className="max-w-2xl mb-3 text-[0.8125rem] text-center md:text-[1rem] lg:text-[1.25rem]">
-            {formattedHtml}
-          </div>
+          {formattedHtml && (
+            <div className="max-w-2xl mb-3 text-[0.8125rem] text-center md:text-[1rem] lg:text-[1.25rem]">
+              {formattedHtml}
+            </div>
+          )}
 
           {link?.[0]?.name && (
             <div className="flex flex-col items-center gap-2">
