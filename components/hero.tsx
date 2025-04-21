@@ -35,41 +35,43 @@ export const Hero = ({ blok }: HeroProps) => {
   const html = richTextResolver(options).render(text);
   const formattedHtml = convertAttributesInElement(html);
   const linkUrl = link?.[0]?.link ? getStoryblokLinkUrl(link[0].link) : "#";
-  const linkName = link?.[0]?.name || "Contact Me";
+  const linkName = link?.[0]?.name ?? "Contact Me";
+  const buttonVariant = link?.[0]?.variant ?? "primary";
 
   return (
     <section
       {...storyblokEditable(blok)}
       data-testid="hero"
       id={blok._uid}
-      className="w-full min-h-[80vh] flex items-center justify-center py-12 md:py-24 relative overflow-hidden"
+      className="w-full xl:min-h-[73vh] flex items-center justify-center py-12 md:py-24 relative overflow-hidden"
     >
       {with_svg && (
         <>
-          <div className="absolute top-10 right-10 md:top-20 md:right-20 lg:top-24 lg:right-32 w-24 h-24 md:w-32 md:h-32">
-            <StarShape1 />
+          <div className="absolute top-10 right-10 md:top-20 md:right-20 lg:top-24 lg:right-32">
+            <StarShape1 className="h-[50px] w-[50px] md:h-[66px] md:w-[66px] xl:w-[169px] xl:h-[169px]" />
           </div>
-          <div className="absolute bottom-10 left-10 md:bottom-20 md:left-20 lg:bottom-24 lg:left-32 w-24 h-24 md:w-32 md:h-32">
-            <StarShape2 />
+          <div className="absolute bottom-10 left-10 md:bottom-20 md:left-20 lg:bottom-24 lg:left-32">
+            <StarShape2 className="h-[50px] w-[50px] md:h-[66px] md:w-[66px] xl:w-[169px] xl:h-[169px]" />
           </div>
         </>
       )}
 
-      <div className="container px-4 md:px-6 max-w-3xl">
-        <div className="flex flex-col items-center text-center space-y-8">
-          <h1 className="text-4xl text-black md:text-5xl lg:text-6xl font-bold tracking-tighter">
+      <div className="container max-w-3xl px-4 md:px-6">
+        <div className="flex flex-col items-center gap-2 text-center md:gap-3 lg:gap-4">
+          <h1 className="text-4xl font-semibold tracking-tighter text-black md:text-[3.25rem] lg:text-[5rem]">
             {tagline}
           </h1>
 
-          <div className="text-lg md:text-xl text-center max-w-2xl">
+          <div className="max-w-2xl mb-3 text-[0.8125rem] text-center md:text-[1rem] lg:text-[1.25rem]">
             {formattedHtml}
           </div>
 
-          {link && link[0]?.name && (
-            <div className="flex flex-col items-center space-y-3 pt-4">
+          {link?.[0]?.name && (
+            <div className="flex flex-col items-center gap-2">
               <Button
-                variant="default"
-                className="rounded-full bg-black text-white hover:bg-black/90 px-6 py-2 h-auto text-base"
+                hideIcon
+                variant={buttonVariant}
+                className="text-base"
                 asChild
               >
                 <a href={linkUrl}>{linkName}</a>
