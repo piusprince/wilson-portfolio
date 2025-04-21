@@ -60,57 +60,60 @@ export default function Footer({ blok }: FooterProps) {
             </Link>
           </div>
 
-          <div className="flex flex-col items-center md:items-start max-w-[559px]">
-            {mainHeadline && (
-              <h2 className="mb-8 text-2xl font-bold text-center text-black md:text-3xl md:text-left">
-                {mainHeadline.content}
-              </h2>
-            )}
-
-            {ctaButton && (
-              <div className="relative">
-                <div className="absolute w-full transform -translate-x-1/2 -top-8 left-1/2">
-                  <div className="w-full border-t border-gray-300 border-dashed"></div>
-                </div>
-                <Button asChild>
-                  <Link href={getStoryblokLinkUrl(ctaButton.link)}>
-                    {ctaButton.name}
-                  </Link>
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="border-t border-gray-200">
-        <div className="container px-6 py-4 mx-auto md:px-10">
-          <div className="flex flex-col items-center justify-between md:flex-row">
-            <div className="mb-4 md:mb-0">
-              <p className="text-sm text-gray-600">
-                © {currentYear} {subFooter.name}
-              </p>
-            </div>
-
-            <nav className="flex space-x-6">
-              {subFooter.links.map((item: LinkItem) => (
-                <Link
-                  key={item._uid}
-                  href={getStoryblokLinkUrl(item.link)}
-                  className="text-sm text-gray-600 hover:underline"
-                >
-                  {item.name}
-                </Link>
-              ))}
-              {subFooter.links.length === 0 && (
-                <span className="text-sm text-gray-600">
-                  No links available
-                </span>
+          {(mainHeadline || ctaButton) && (
+            <div className="flex flex-col items-center md:items-start max-w-[559px]">
+              {mainHeadline?.content && (
+                <h2 className="mb-8 text-2xl font-bold text-center text-black md:text-3xl md:text-left">
+                  {mainHeadline.content}
+                </h2>
               )}
-            </nav>
-          </div>
+
+              {ctaButton?.name && (
+                <div className="relative">
+                  <div className="absolute w-full transform -translate-x-1/2 -top-8 left-1/2">
+                    <div className="w-full border-t border-gray-300 border-dashed"></div>
+                  </div>
+                  <Button asChild>
+                    <Link href={getStoryblokLinkUrl(ctaButton.link)}>
+                      {ctaButton.name}
+                    </Link>
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
+
+      {subFooter && (
+        <div className="border-t border-gray-200">
+          <div className="container px-6 py-4 mx-auto md:px-10">
+            <div className="flex flex-col items-center justify-between md:flex-row">
+              {subFooter.name && (
+                <div className="mb-4 md:mb-0">
+                  <p className="text-sm text-gray-600">
+                    © {currentYear} {subFooter.name}
+                  </p>
+                </div>
+              )}
+
+              {subFooter.links?.length > 0 && (
+                <nav className="flex space-x-6">
+                  {subFooter.links.map((item: LinkItem) => (
+                    <Link
+                      key={item._uid}
+                      href={getStoryblokLinkUrl(item.link)}
+                      className="text-sm text-gray-600 hover:underline"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </nav>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }
