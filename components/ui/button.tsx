@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils";
 import { MoveUpRight } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-[50px] text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none outline-none focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+  "inline-flex items-center font-bricolage justify-center whitespace-nowrap rounded-[50px] text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none outline-none focus-visible:ring-ring/50 focus-visible:ring-[3px]",
   {
     variants: {
       variant: {
-        primary: "bg-black text-white hover:bg-black/90",
-        secondary: "bg-white text-black border border-black hover:bg-gray-50",
+        primary: "text-black hover:underline",
+        secondary: "text-gray-600 hover:text-black",
         button_primary: "bg-black text-white hover:bg-black/90",
         button_secondary:
           "bg-white text-black border border-black hover:bg-gray-50",
@@ -45,11 +45,11 @@ function Button({
     <Comp
       className={cn(
         buttonVariants({ variant, hideIcon, className }),
-        "px-[10px] py-[10px]"
+        "px-[34px] py-[14px] text-base"
       )}
       {...props}
     >
-      <span>
+      <span className="px-3">
         {children}
         {!hideIcon && <MoveUpRight className="w-4 h-4" />}
       </span>
