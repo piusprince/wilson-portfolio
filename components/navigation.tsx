@@ -46,15 +46,16 @@ export default function Navigation({ blok }: NavigationProps) {
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild className="md:hidden">
-          <Button className="rounded-full text-white p-2.5">
-            <Menu className="w-8 h-8 text-white bg-black" />
+          <button className="text-white p-2.5 cursor-pointer  bg-black rounded-full">
+            <Menu className="w-8 h-8 text-white" />
             <span className="sr-only">Toggle menu</span>
-          </Button>
+          </button>
         </SheetTrigger>
         <SheetContent side="right">
           <nav className="flex flex-col gap-4 mt-8">
             {blok.links.map((item: LinkItem) => (
               <Link
+                prefetch
                 key={item._uid}
                 href={getStoryblokLinkUrl(item.link)}
                 target={item.link.target ?? "_self"}
@@ -69,16 +70,37 @@ export default function Navigation({ blok }: NavigationProps) {
       </Sheet>
 
       <nav className="items-center hidden space-x-8 md:flex">
-        {blok.links.map((item: LinkItem) => (
-          <Link
-            key={item._uid}
-            href={getStoryblokLinkUrl(item.link)}
-            target={item.link.target ?? "_self"}
-            className="text-sm font-medium hover:underline"
-          >
-            {item.name}
-          </Link>
-        ))}
+        {blok.links.map((item: LinkItem, index: number) => {
+          const isLastItem = index === blok.links.length - 1;
+
+          return isLastItem ? (
+            <Button
+              key={item._uid}
+              hideIcon
+              variant="button_primary"
+              className="w-[119px]"
+              asChild
+            >
+              <Link
+                prefetch
+                href={getStoryblokLinkUrl(item.link)}
+                target={item.link.target ?? "_self"}
+              >
+                {item.name}
+              </Link>
+            </Button>
+          ) : (
+            <Link
+              prefetch
+              key={item._uid}
+              href={getStoryblokLinkUrl(item.link)}
+              target={item.link.target ?? "_self"}
+              className="flex items-center gap-1 text-sm font-medium hover:underline"
+            >
+              {item.name}
+            </Link>
+          );
+        })}
       </nav>
     </header>
   );
