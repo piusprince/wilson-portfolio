@@ -32,9 +32,9 @@ export default function Navigation({ blok }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full max-w-[1440px] container mx-auto py-4  flex items-center justify-between">
+    <header className="w-full max-w-[1283px] container mx-auto py-[22px] px-[26px]  flex items-center justify-between">
       <div className="flex items-center">
-        <Link href="/" className="font-bold text-2xl">
+        <Link href="/" className="text-2xl font-bold">
           {blok.logo ? (
             <Logo className="w-10 h-10 text-gray-700" />
           ) : (
@@ -46,8 +46,8 @@ export default function Navigation({ blok }: NavigationProps) {
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild className="md:hidden">
-          <Button variant="ghost" size="icon">
-            <Menu className="h-6 w-6" />
+          <Button className="rounded-full text-white p-2.5" size="icon">
+            <Menu className="w-8 h-8 text-white bg-black" />
             <span className="sr-only">Toggle menu</span>
           </Button>
         </SheetTrigger>
@@ -68,7 +68,7 @@ export default function Navigation({ blok }: NavigationProps) {
         </SheetContent>
       </Sheet>
 
-      <nav className="hidden md:flex items-center space-x-8">
+      <nav className="items-center hidden space-x-8 md:flex">
         {blok.links.map((item: LinkItem) => (
           <Link
             key={item._uid}
