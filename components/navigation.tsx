@@ -46,7 +46,7 @@ export default function Navigation({ blok }: NavigationProps) {
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild className="md:hidden">
-          <Button className="rounded-full text-white p-2.5" size="icon">
+          <Button className="rounded-full text-white p-2.5">
             <Menu className="w-8 h-8 text-white bg-black" />
             <span className="sr-only">Toggle menu</span>
           </Button>
