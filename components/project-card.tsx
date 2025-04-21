@@ -200,7 +200,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
       </div>
 
       <div className="text-black bg-white">
-        <div className="grid grid-cols-1 gap-[103px] lg:grid-cols-[871px_274.25px]">
+        <div className="grid grid-cols-1 gap-6 lg:gap-[103px] lg:grid-cols-[871px_274.25px]">
           {formattedProjectSummary && (
             <div>
               <div className="flex items-center justify-between mb-2">
