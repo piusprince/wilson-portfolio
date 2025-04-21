@@ -163,3 +163,32 @@
     color: hsla(250, 100%, 72%, 1);
   }
 }
+
+
+.image-gallery {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0.5rem;
+}
+
+.image-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-item {
+  flex: 0 0 auto;
+  width: 197.2px;
+  height: 427px;
+}
+
+.gallery-item-active {
+  flex: 0 0 auto;
+  width: 452px;
+  height: 425px;
+}
+
+.gallery-item-active {
+  aspect-ratio: 1.064;
+}
