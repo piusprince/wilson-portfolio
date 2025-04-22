@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import StoryblokProvider from "@/lib/storyblok-provider";
+import ClientLayout from "./client-layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,7 @@ export default async function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${bricolageGrotesque.variable} antialiased`}
         >
-          {children}
+          <ClientLayout>{children}</ClientLayout>
         </body>
       </html>
     </StoryblokProvider>
