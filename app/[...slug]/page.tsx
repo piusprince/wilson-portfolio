@@ -21,26 +21,33 @@ export default async function CatchAllPage({ params }: Props) {
   const fullSlug = (await params).slug ? (await params).slug.join("/") : "home";
   const isProduction = process.env.NODE_ENV === "production";
   const isDraftMode = (await draftMode()).isEnabled;
+
+  let storyblokVersion;
+  switch (true) {
+    case isDraftMode:
+      storyblokVersion = StoryblokVersion.DRAFT;
+      break;
+    case isProduction:
+      storyblokVersion = StoryblokVersion.PUBLISHED;
+      break;
+    default:
+      storyblokVersion = StoryblokVersion.DRAFT;
+      break;
+  }
+
   const headerData = await fetchHeader({
-    version: isDraftMode
-      ? StoryblokVersion.DRAFT
-      : isProduction
-      ? StoryblokVersion.PUBLISHED
-      : StoryblokVersion.DRAFT,
+    version: storyblokVersion,
   });
+
   const footerData = await fetchFooter({
-    version: isDraftMode
-      ? StoryblokVersion.DRAFT
-      : isProduction
-      ? StoryblokVersion.PUBLISHED
-      : StoryblokVersion.DRAFT,
+    version: storyblokVersion,
   });
 
   try {
     let storyData = await fetchStory({
       slug: `cdn/stories/${fullSlug}`,
       params: {
-        version: isDraftMode ? "draft" : isProduction ? "published" : "draft",
+        version: storyblokVersion,
       },
     });
 
@@ -53,26 +60,22 @@ export default async function CatchAllPage({ params }: Props) {
 
     const story = storyData.story;
 
-    console.log({ story });
-
     if (!story) {
       return notFound();
     }
 
     return (
       <>
-        {headerData && fullSlug !== "configs/header" && (
-          <Navigation blok={headerData.story.content} />
+        {headerData && <Navigation blok={headerData.story.content} />}
+        {story.content && (
+          <main
+            className="container min-h-screen mx-auto"
+            {...storyblokEditable(story.content)}
+          >
+            <StoryblokServerComponent blok={story.content} />
+          </main>
         )}
-        <main
-          className="container mx-auto"
-          {...storyblokEditable(story.content)}
-        >
-          <StoryblokServerComponent blok={story.content} />
-        </main>
-        {footerData && fullSlug !== "configs/footer" && (
-          <Footer blok={footerData.story.content} />
-        )}
+        {footerData && <Footer blok={footerData.story.content} />}
       </>
     );
   } catch (error) {

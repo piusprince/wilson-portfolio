@@ -1,9 +1,7 @@
 import { CaseStudyIntro } from "@/components/case-study-intro";
-import Footer from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { ImageAtom } from "@/components/image";
 import { MarqueeProjects } from "@/components/marquee_projects";
-import Navigation from "@/components/navigation";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
 import Quote from "@/components/quote";
@@ -28,8 +26,6 @@ storyblokInit({
     hero: Hero,
     marquee_projects: MarqueeProjects,
     project: ProjectCard,
-    navigation: Navigation,
-    footer: Footer,
     text_component: Text,
     image_component: ImageAtom,
     case_study_intro: CaseStudyIntro,
