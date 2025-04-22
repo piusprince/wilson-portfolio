@@ -12,7 +12,7 @@ interface LoadingScreenProps {
 export default function LoadingScreen({
   onLoadingComplete,
   duration = 3000,
-  finalCount = 83,
+  finalCount = 100,
 }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [counter, setCounter] = useState(0);
@@ -62,7 +62,6 @@ export default function LoadingScreen({
             },
           }}
         >
-          {/* Center the loading bar */}
           <div className="flex items-center justify-center flex-grow">
             <div className="w-full max-w-md px-4">
               <motion.div
@@ -70,10 +69,12 @@ export default function LoadingScreen({
                 animate={
                   isExiting
                     ? {
-                        height: "100vh",
-                        y: "-50vh",
+                        height: "200vh",
+                        width: "200vw",
+                        x: "-50vw",
+                        y: "-100vh",
                         transition: {
-                          duration: 0.8,
+                          duration: 1.2,
                           ease: [0.22, 1, 0.36, 1],
                         },
                       }
@@ -85,12 +86,12 @@ export default function LoadingScreen({
                   initial={{ width: "0%" }}
                   animate={{
                     width: `${progress}%`,
-                    height: isExiting ? "100vh" : "100%",
+                    height: isExiting ? "200vh" : "100%",
                   }}
                   transition={{
                     width: { ease: "easeInOut" },
                     height: {
-                      duration: 0.8,
+                      duration: 1.2,
                       ease: [0.22, 1, 0.36, 1],
                       delay: 0.1,
                     },
@@ -100,7 +101,6 @@ export default function LoadingScreen({
             </div>
           </div>
 
-          {/* Position the counter at the bottom left */}
           <motion.div
             className="absolute font-light text-white bottom-16 left-16 text-7xl"
             initial={{ opacity: 0, y: 20 }}
