@@ -29,7 +29,10 @@ export const Text = ({
       {...storyblokEditable(blok)}
       data-testid="text"
       id={blok._uid}
-      className={clsx("w-full relative overflow-hidden", className)}
+      className={clsx(
+        "w-full max-w-[1283px] mx-auto relative overflow-hidden",
+        className
+      )}
     >
       {formattedHtml && (
         <div className="prose prose-lg max-w-none ">{formattedHtml}</div>
