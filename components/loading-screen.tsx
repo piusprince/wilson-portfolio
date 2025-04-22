@@ -102,7 +102,7 @@ export default function LoadingScreen({
           </div>
 
           <motion.div
-            className="absolute font-light text-white bottom-16 left-16 text-7xl"
+            className="absolute font-light text-white font-bricolage bottom-16 left-16 text-7xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isExiting ? 0 : 1, y: isExiting ? -20 : 0 }}
             transition={{
