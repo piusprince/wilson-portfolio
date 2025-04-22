@@ -31,10 +31,13 @@ export const TextImage = ({ blok }: TextImageProps) => {
   return (
     <section
       {...storyblokEditable(blok)}
-      className={clsx("flex flex-col w-full py-8 md:py-16 gap-8 md:gap-12", {
-        "flex-col": isTop,
-        "flex-col-reverse": !isTop,
-      })}
+      className={clsx(
+        "flex flex-col w-full max-w-[1283px] mx-auto py-8 md:py-16 gap-8 md:gap-12",
+        {
+          "flex-col": isTop,
+          "flex-col-reverse": !isTop,
+        }
+      )}
     >
       {imageBlok && (
         <div className="w-full">
