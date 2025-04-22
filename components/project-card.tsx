@@ -153,12 +153,12 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
           <div className="flex flex-wrap gap-2">
             {categories.length > 0 &&
               categories.map((category) => (
-                <span
+                <p
                   key={`category-${category}`}
-                  className="text-sm opacity-70"
+                  className="text-sm text-[#666666]"
                 >
                   {category}
-                </span>
+                </p>
               ))}
           </div>
 
