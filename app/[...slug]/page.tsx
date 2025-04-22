@@ -108,8 +108,9 @@ export async function generateMetadata({ params }: Props) {
     }
 
     return {
-      title: story.name || "Storyblok Page",
-      description: story.content?.description ?? "",
+      title: story.content.page_title ?? story.name ?? "Storyblok Page",
+      description:
+        story.content.page_description ?? story.content?.description ?? "",
     };
   } catch (error) {
     console.error("Error fetching metadata:", error);
