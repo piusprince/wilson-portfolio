@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, getStoryblokLinkUrl } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { storyblokEditable } from "@storyblok/react";
 import Image from "next/image";
 import React from "react";
@@ -148,12 +148,9 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                   {project_name}
                 </h2>
               </div>
-              <Link
-                href={getStoryblokLinkUrl(project_link[0]?.link)}
-                className="text-white underline font-bricolage"
-              >
+              <p className="text-white underline font-bricolage">
                 {project_link[0]?.name || "View Project"}
-              </Link>
+              </p>
             </div>
 
             <div className="flex flex-wrap gap-2">
@@ -169,7 +166,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
             </div>
 
             {project_description && (
-              <p className="text-lg font-medium max-w-[741px] mb-11 md:mb-[70px] lg:mb-0">
+              <p className="text-lg font-normal max-w-[741px] mb-11 md:mb-[70px] lg:mb-0">
                 {project_description}
               </p>
             )}
