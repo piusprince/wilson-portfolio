@@ -50,24 +50,24 @@ export const CaseStudyIntro = ({ blok }: CaseStudyIntroBlok) => {
         )}
 
         {blok.case_study_text && (
-          <Text blok={textComponentBlok} className="mb-8" />
+          <Text blok={textComponentBlok} className="mb-8 !px-0" />
         )}
 
         <div className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-10 lg:gap-10 text-sm">
           {blok.case_study_year && (
-            <div className="mb-4 sm:mb-0">
+            <div>
               <p className="mb-1 font-medium text-gray-500">Year</p>
               <p>{blok.case_study_year}</p>
             </div>
           )}
           {blok.case_study_industry && (
-            <div className="mb-4 sm:mb-0">
+            <div>
               <p className="mb-1 font-medium text-gray-500">Industry</p>
               <p>{blok.case_study_industry}</p>
             </div>
           )}
           {blok.case_study_role && (
-            <div className="mb-4 sm:mb-0">
+            <div>
               <p className="mb-1 font-medium text-gray-500">Role</p>
               <p>{blok.case_study_role}</p>
             </div>
