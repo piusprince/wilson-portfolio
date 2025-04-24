@@ -31,7 +31,7 @@ export const Text = ({
     >
       {html && (
         <div
-          className="prose prose-lg max-w-none"
+          className="prose prose-lg max-w-none [&_*]:text-black"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
         />
       )}
