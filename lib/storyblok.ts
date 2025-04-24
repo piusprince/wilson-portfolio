@@ -1,4 +1,5 @@
 import { CaseStudyIntro } from "@/components/case-study-intro";
+import HeadlineBlok from "@/components/headline-blok";
 import { Hero } from "@/components/hero";
 import { ImageAtom } from "@/components/image";
 import { MarqueeProjects } from "@/components/marquee_projects";
@@ -26,6 +27,7 @@ storyblokInit({
     hero: Hero,
     marquee_projects: MarqueeProjects,
     project: ProjectCard,
+    headline: HeadlineBlok,
     text_component: Text,
     image_component: ImageAtom,
     case_study_intro: CaseStudyIntro,
