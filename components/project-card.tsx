@@ -1,15 +1,10 @@
 "use client";
 
 import { cn, getStoryblokLinkUrl } from "@/lib/utils";
-import {
-  convertAttributesInElement,
-  richTextResolver,
-  storyblokEditable,
-} from "@storyblok/react";
+import { storyblokEditable } from "@storyblok/react";
 import Image from "next/image";
-import { Button } from "./ui/button";
 import React from "react";
-import { options } from "@/lib/richtextUtils";
+
 import Link from "next/link";
 
 export type ProjectLink = {
@@ -47,6 +42,26 @@ export type ProjectImage = {
   _editable?: string;
 };
 
+export type ProjectVideo = {
+  _uid: string;
+  video: {
+    id: number;
+    alt: string;
+    name: string;
+    focus: string;
+    title: string;
+    source: string;
+    filename: string;
+    copyright: string;
+    fieldtype: "asset";
+    meta_data: Record<string, unknown>;
+    is_external_url: boolean;
+  };
+  component: string;
+  main_image: boolean;
+  _editable?: string;
+};
+
 export type Project = {
   _uid: string;
   role: string;
@@ -57,7 +72,9 @@ export type Project = {
   project_link: ProjectLink[];
   project_name: string;
   project_year: string;
+  project_logo: ProjectImage[];
   project_images: ProjectImage[];
+  project_video: ProjectVideo[];
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   project_summary: any;
   background_color: string;
@@ -76,178 +93,141 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
   const {
     project_name,
     project_link,
-    project_year,
+    // project_year,
     project_images,
-    project_summary,
+    project_video,
     project_category,
     project_description,
     role,
     skills,
-    team,
     background_color,
   } = blok;
 
-  console.log({ project_link });
-
-  const mainImage = project_images.find((img) => img.main_image);
-  const additionalImages = project_images
-    .filter((img) => !img.main_image)
-    .slice(0, 5);
+  const additionalImages = project_images.slice(0, 5);
+  const mainVideo = project_video?.[0];
 
   const categories = project_category
     .split(",")
     .map((cat) => cat.trim())
     .filter(Boolean);
 
-  const [summaryExpanded, setSummaryExpanded] = React.useState(false);
-
-  const allImages = mainImage
-    ? [mainImage, ...additionalImages]
+  const allMedia = mainVideo
+    ? [mainVideo, ...additionalImages]
     : [...additionalImages];
-
-  const projectSummaryHtml = project_summary
-    ? richTextResolver(options).render(project_summary)
-    : "";
-
-  const teamMembersHtml = team ? richTextResolver(options).render(team) : "";
-
-  const formattedProjectSummary = projectSummaryHtml
-    ? convertAttributesInElement(projectSummaryHtml)
-    : "";
-
-  const formattedTeamMembers = teamMembersHtml
-    ? convertAttributesInElement(teamMembersHtml)
-    : "";
 
   return (
     <section
       {...storyblokEditable(blok)}
       className={`rounded-lg px-5 overflow-hidden w-full text-white items-center mb-[90px]`}
     >
-      <div
-        className="w-full mb-6 rounded-lg"
-        style={{
-          backgroundColor: background_color || "#121212",
-          color: "white",
-        }}
-      >
-        <div className="px-10 pt-10">
-          <div className="flex items-start justify-between mb-2">
-            <div className="flex items-center gap-3">
-              {mainImage && (
-                <div className="flex items-center justify-center w-8 h-8 overflow-hidden rounded-md bg-white/10">
-                  <Image
-                    src={mainImage.image.filename || "/placeholder.svg"}
-                    alt={mainImage.image.alt || project_name}
-                    width={32}
-                    height={32}
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <h2 className="text-xl font-medium text-white">{project_name}</h2>
+      <Link href={project_link[0]?.link.cached_url ?? "#"} className="block">
+        <div
+          className="w-full mb-6 rounded-lg"
+          style={{
+            backgroundColor: background_color || "#121212",
+            color: "white",
+          }}
+        >
+          <div className="px-10 pt-10">
+            <div className="flex items-start justify-between mb-2">
+              <div className="flex items-center gap-3">
+                {project_images?.[0]?.image && (
+                  <div className="flex items-center justify-center w-8 h-8 overflow-hidden rounded-md bg-white/10">
+                    <Image
+                      src={
+                        project_images[0].image.filename || "/placeholder.svg"
+                      }
+                      alt={project_images[0].image.alt || project_name}
+                      width={32}
+                      height={32}
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <h2 className="text-xl font-medium text-white">
+                  {project_name}
+                </h2>
+              </div>
+              <Link
+                href={getStoryblokLinkUrl(project_link[0]?.link)}
+                className="text-white underline font-bricolage"
+              >
+                {project_link[0]?.name || "View Project"}
+              </Link>
             </div>
-            <span className="text-sm opacity-80">{project_year}</span>
+
+            <div className="flex flex-wrap gap-2">
+              {categories.length > 0 &&
+                categories.map((category) => (
+                  <p
+                    key={`category-${category}`}
+                    className="text-sm text-[#666666]"
+                  >
+                    {category}
+                  </p>
+                ))}
+            </div>
+
+            {project_description && (
+              <p className="text-lg font-medium max-w-[741px] mb-11 md:mb-[70px] lg:mb-0">
+                {project_description}
+              </p>
+            )}
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {categories.length > 0 &&
-              categories.map((category) => (
-                <p
-                  key={`category-${category}`}
-                  className="text-sm text-[#666666]"
-                >
-                  {category}
-                </p>
-              ))}
-          </div>
-
-          {project_description && (
-            <p className="text-lg font-medium max-w-[741px] mb-11 md:mb-[70px] lg:mb-0">
-              {project_description}
-            </p>
+          {allMedia && allMedia.length > 0 && (
+            <div className="px-10 pb-[66px] lg:mb-0 lg:py-10">
+              <div className="flex gap-5 overflow-x-auto image-gallery touch-pan-x">
+                {allMedia.map((media, index) => (
+                  <div
+                    key={media._uid}
+                    className={cn(
+                      "rounded-lg overflow-hidden transition-all duration-300 ease-in-out",
+                      index === 0
+                        ? "h-[425px] w-[452px] gallery-item-active"
+                        : "h-[427px] w-[197.2px] gallery-item"
+                    )}
+                  >
+                    {media.component === "video_component" ? (
+                      <video
+                        src={media.video.filename}
+                        autoPlay
+                        loop
+                        muted
+                        className="object-cover w-full h-full"
+                        poster={media.video.filename}
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <Image
+                        src={
+                          "image" in media
+                            ? media.image.filename ?? "/placeholder.svg"
+                            : "/placeholder.svg"
+                        }
+                        alt={
+                          "image" in media
+                            ? media.image.alt ??
+                              `${project_name} screenshot ${index + 1}`
+                            : `${project_name} screenshot ${index + 1}`
+                        }
+                        width={index === 0 ? 452 : 197.2}
+                        height={index === 0 ? 425 : 427}
+                        className="object-cover w-full h-full"
+                        draggable={false}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
         </div>
-
-        {allImages.length > 0 && (
-          <div className="px-10 pb-[66px] lg:mb-0 lg:py-10">
-            <div className="flex gap-5 overflow-x-auto image-gallery touch-pan-x">
-              {allImages.map((img, index) => (
-                <div
-                  key={img._uid}
-                  className={cn(
-                    "rounded-lg overflow-hidden transition-all duration-300 ease-in-out",
-                    img.main_image
-                      ? "h-[425px] w-[452px] gallery-item-active"
-                      : "h-[427px] w-[197.2px] gallery-item"
-                  )}
-                >
-                  <Image
-                    src={img.image.filename || "/placeholder.svg"}
-                    alt={
-                      img.image.alt || `${project_name} screenshot ${index + 1}`
-                    }
-                    width={img.main_image ? 452 : 197.2}
-                    height={img.main_image ? 425 : 427}
-                    className="object-cover w-full h-full"
-                    draggable={false}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+      </Link>
 
       <div className="text-black bg-white">
         <div className="grid grid-cols-1 gap-6 lg:gap-[103px] lg:grid-cols-[871px_274.25px]">
-          {formattedProjectSummary && (
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-medium">Summary</h3>
-                <button
-                  onClick={() => setSummaryExpanded(!summaryExpanded)}
-                  className="text-sm opacity-70 hover:opacity-100"
-                >
-                  {summaryExpanded ? "Hide" : "Show"}
-                </button>
-              </div>
-
-              <div
-                className={cn(
-                  "transition-all text-base mb-4 duration-300",
-                  summaryExpanded
-                    ? "max-h-96 opacity-100"
-                    : "max-h-24 opacity-100 line-clamp-3"
-                )}
-              >
-                {formattedProjectSummary}
-              </div>
-
-              {project_link && project_link.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {project_link.map((link) => {
-                    return (
-                      <Link
-                        key={link._uid}
-                        href={getStoryblokLinkUrl(link.link)}
-                        rel="noopener noreferrer"
-                      >
-                        <Button
-                          variant={link.variant}
-                          className="text-sm font-medium"
-                          asChild
-                        >
-                          {link.name}
-                        </Button>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          )}
-
           <div className="space-y-6">
             {role && (
               <div>
@@ -269,13 +249,6 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                     </li>
                   ))}
                 </ul>
-              </div>
-            )}
-
-            {formattedTeamMembers && (
-              <div>
-                <h3 className="mb-2 text-sm font-medium">Team</h3>
-                {formattedTeamMembers}
               </div>
             )}
           </div>
