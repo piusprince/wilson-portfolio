@@ -29,7 +29,7 @@ export default function TextImageGrid({ blok }: TextImageGridProps) {
       {...storyblokEditable(blok)}
       data-testid="text-image-grid"
       id={blok._uid}
-      className="container mx-auto py-16 max-w-[1283px]"
+      className="container mx-auto py-16 pl-4 pr-6 md:px-[50px] lg:px-0 max-w-[1283px]"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <div className="space-y-6">
@@ -38,11 +38,11 @@ export default function TextImageGrid({ blok }: TextImageGridProps) {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {blok.image_grid?.map((imageBlok, index) => {
             if (index === 0) {
               return (
-                <div key={imageBlok._uid} className="md:col-span-2">
+                <div key={imageBlok._uid} className="col-span-2">
                   <ImageAtom blok={imageBlok} />
                 </div>
               );
