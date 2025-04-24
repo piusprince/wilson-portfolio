@@ -44,7 +44,7 @@ export const Hero = ({ blok }: HeroProps) => {
     >
       {with_svg && (
         <>
-          <div className="absolute top-4 right-4 md:top-20 md:right-20 lg:top-24 lg:right-32">
+          <div className="absolute top-4 right-4 md:top-20 md:right-[20px] lg:top-24 lg:right-[70px]">
             <StarShape1 className="h-[30px] w-[30px] md:h-[66px] md:w-[66px] xl:w-[169px] xl:h-[169px]" />
           </div>
           <div className="absolute bottom-4 left-4 md:bottom-20 md:left-20 lg:bottom-24 lg:left-32">
@@ -53,7 +53,7 @@ export const Hero = ({ blok }: HeroProps) => {
         </>
       )}
 
-      <div className="container max-w-3xl px-8 md:px-6">
+      <div className="container max-w-3xl px-[22px] md:px-6">
         <div className="flex flex-col items-center gap-2 text-center md:gap-3 lg:gap-4">
           {tagline && (
             <h1 className="text-4xl font-semibold tracking-tighter text-black md:text-[3.25rem] lg:text-[5rem]">

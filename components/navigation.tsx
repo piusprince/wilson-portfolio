@@ -51,15 +51,32 @@ export default function Navigation({ blok }: NavigationProps) {
             <span className="sr-only">Toggle menu</span>
           </button>
         </SheetTrigger>
-        <SheetContent side="right">
-          <nav className="flex flex-col gap-4 mt-8">
+        <SheetContent
+          side="right"
+          className="px-6 py-8 w-[280px] border-l border-gray-100"
+        >
+          <div className="flex justify-start mb-8">
+            <Link
+              href="/website"
+              className="text-2xl font-bold"
+              onClick={() => setIsOpen(false)}
+            >
+              {blok.logo ? (
+                <Logo className="w-8 h-8 text-gray-700" />
+              ) : (
+                <span className="text-gray-700">Logo</span>
+              )}
+              <span className="sr-only">Home</span>
+            </Link>
+          </div>
+          <nav className="flex flex-col space-y-1">
             {blok.links.map((item: LinkItem) => (
               <Link
                 prefetch
                 key={item._uid}
                 href={getStoryblokLinkUrl(item.link)}
                 target={item.link.target ?? "_self"}
-                className="text-lg font-medium hover:underline"
+                className="text-lg font-medium px-3 py-3 rounded-md hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}

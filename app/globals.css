@@ -254,7 +254,6 @@
   -ms-overflow-style: none;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  gap: 0.5rem;
 }
 
 .image-gallery::-webkit-scrollbar {

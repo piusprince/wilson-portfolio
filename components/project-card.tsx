@@ -171,7 +171,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
 
         {allImages.length > 0 && (
           <div className="px-10 pb-[66px] lg:mb-0 lg:py-10">
-            <div className="flex gap-2 overflow-x-auto image-gallery touch-pan-x">
+            <div className="flex gap-5 overflow-x-auto image-gallery touch-pan-x">
               {allImages.map((img, index) => (
                 <div
                   key={img._uid}
