@@ -24,24 +24,8 @@ const Headline: React.FC<HeadlineProps> = ({
       data-testid="headline"
       id={_uid}
       {...storyblokEditable({ _uid })}
-      className={cn(
-        "font-bold mb-6",
-        {
-          "text-[var(--h1-size-mobile)] md:text-[var(--h1-size-tablet)] lg:text-[var(--h1-size-desktop)]":
-            level === "h1",
-          "text-[var(--h2-size-mobile)] md:text-[var(--h2-size-tablet)] lg:text-[var(--h2-size-desktop)]":
-            level === "h2",
-          "text-[var(--h3-size-mobile)] md:text-[var(--h3-size-tablet)] lg:text-[var(--h3-size-desktop)]":
-            level === "h3",
-          "text-[var(--h4-size-mobile)] md:text-[var(--h4-size-tablet)] lg:text-[var(--h4-size-desktop)]":
-            level === "h4",
-          "text-[var(--h5-size-mobile)] md:text-[var(--h5-size-tablet)] lg:text-[var(--h5-size-desktop)]":
-            level === "h5",
-          "text-[var(--h6-size-mobile)] md:text-[var(--h6-size-tablet)] lg:text-[var(--h6-size-desktop)]":
-            level === "h6",
-        },
-        className
-      )}
+      // Remove conditional size classes, keep base styles and passed className
+      className={cn("font-bold mb-6", className)}
     >
       {content}
     </HeadingTag>
