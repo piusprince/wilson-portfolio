@@ -29,7 +29,7 @@ export default function TextImageGrid({ blok }: TextImageGridProps) {
       {...storyblokEditable(blok)}
       data-testid="text-image-grid"
       id={blok._uid}
-      className="container mx-auto px-6 py-16 md:px-10"
+      className="container mx-auto py-16 max-w-[1283px]"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <div className="space-y-6">
