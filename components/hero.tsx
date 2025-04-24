@@ -2,15 +2,12 @@
 
 import React from "react";
 
-import {
-  convertAttributesInElement,
-  richTextResolver,
-  storyblokEditable,
-} from "@storyblok/react";
+import { renderRichText, storyblokEditable } from "@storyblok/react";
 import { Button } from "@/components/ui/button";
 import { StarShape1, StarShape2 } from "@/components/ui/icons";
-import { options } from "@/lib/richtextUtils";
+
 import { getStoryblokLinkUrl, type StoryblokLink } from "@/lib/utils";
+import DOMPurify from "isomorphic-dompurify";
 
 export type LinkProps = {
   _uid?: string;
@@ -33,8 +30,7 @@ type HeroProps = Readonly<{
 export const Hero = ({ blok }: HeroProps) => {
   const { tagline, with_svg, link, text } = blok;
 
-  const html = richTextResolver(options).render(text);
-  const formattedHtml = convertAttributesInElement(html);
+  const html = renderRichText(text);
   const linkUrl = link?.[0]?.link ? getStoryblokLinkUrl(link[0].link) : "#";
   const linkName = link?.[0]?.name ?? "Contact Me";
   const buttonVariant = link?.[0]?.variant ?? "primary";
@@ -65,10 +61,13 @@ export const Hero = ({ blok }: HeroProps) => {
             </h1>
           )}
 
-          {formattedHtml && (
-            <div className="max-w-2xl mb-3 text-[0.8125rem] text-center md:text-[1rem] lg:text-[1.25rem]">
-              {formattedHtml}
-            </div>
+          {html && (
+            <div
+              className="max-w-2xl mb-3 text-[0.8125rem] text-center md:text-[1rem] lg:text-[1.25rem]"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(html),
+              }}
+            />
           )}
 
           {link?.[0]?.name && (
