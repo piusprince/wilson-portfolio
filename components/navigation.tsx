@@ -34,7 +34,7 @@ export default function Navigation({ blok }: NavigationProps) {
   return (
     <header className="w-full max-w-[1283px] container mx-auto py-[22px] px-[26px] lg:px-0  flex items-center justify-between">
       <div className="flex items-center">
-        <Link href="/" className="text-2xl font-bold">
+        <Link href="/website" className="text-2xl font-bold">
           {blok.logo ? (
             <Logo className="w-10 h-10 text-gray-700" />
           ) : (
