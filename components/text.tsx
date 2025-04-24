@@ -1,10 +1,6 @@
-import { options } from "@/lib/richtextUtils";
-import {
-  convertAttributesInElement,
-  richTextResolver,
-  storyblokEditable,
-} from "@storyblok/react";
+import { renderRichText, storyblokEditable } from "@storyblok/react";
 import clsx from "clsx";
+import DOMPurify from "isomorphic-dompurify";
 
 type TextProps = {
   _uid: string;
@@ -21,8 +17,7 @@ export const Text = ({
   blok: TextProps;
   className?: string;
 }) => {
-  const html = richTextResolver(options).render(blok.text);
-  const formattedHtml = convertAttributesInElement(html);
+  const html = renderRichText(blok.text);
 
   return (
     <section
@@ -34,10 +29,11 @@ export const Text = ({
         className
       )}
     >
-      {formattedHtml && (
-        <div className="prose prose-lg max-w-none [&_*]:text-black">
-          {formattedHtml}
-        </div>
+      {html && (
+        <div
+          className="prose prose-lg max-w-none"
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
+        />
       )}
     </section>
   );
