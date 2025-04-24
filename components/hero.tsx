@@ -53,10 +53,10 @@ export const Hero = ({ blok }: HeroProps) => {
         </>
       )}
 
-      <div className="container max-w-3xl px-[22px] md:px-6">
+      <div className="container max-w-[804px] px-[22px] md:px-6">
         <div className="flex flex-col items-center gap-2 text-center md:gap-3 lg:gap-4">
           {tagline && (
-            <h1 className="text-4xl font-semibold tracking-tighter text-black md:text-[3.25rem] lg:text-[5rem]">
+            <h1 className="text-4xl font-semibold tracking-tighter text-black md:text-[3.25rem] lg:text-[4.5rem]">
               {tagline}
             </h1>
           )}
