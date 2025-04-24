@@ -94,6 +94,7 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
     project_name,
     project_link,
     // project_year,
+    project_logo,
     project_images,
     project_video,
     project_category,
@@ -105,11 +106,6 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
 
   const additionalImages = project_images.slice(0, 5);
   const mainVideo = project_video?.[0];
-
-  const categories = project_category
-    .split(",")
-    .map((cat) => cat.trim())
-    .filter(Boolean);
 
   const allMedia = mainVideo
     ? [mainVideo, ...additionalImages]
@@ -129,15 +125,13 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
           }}
         >
           <div className="px-10 pt-10">
-            <div className="flex items-start justify-between mb-2">
+            <div className="flex items-start justify-between mb-6">
               <div className="flex items-center gap-3">
-                {project_images?.[0]?.image && (
+                {project_logo?.[0]?.image && (
                   <div className="flex items-center justify-center w-8 h-8 overflow-hidden rounded-md bg-white/10">
                     <Image
-                      src={
-                        project_images[0].image.filename || "/placeholder.svg"
-                      }
-                      alt={project_images[0].image.alt || project_name}
+                      src={project_logo[0].image.filename || "/placeholder.svg"}
+                      alt={project_logo[0].image.alt || project_name}
                       width={32}
                       height={32}
                       className="object-cover"
@@ -153,20 +147,14 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              {categories.length > 0 &&
-                categories.map((category) => (
-                  <p
-                    key={`category-${category}`}
-                    className="text-sm text-[#666666]"
-                  >
-                    {category}
-                  </p>
-                ))}
-            </div>
+            {project_category && (
+              <p className="text-lg mb-4 font-normal text-[#666666]">
+                {project_category}
+              </p>
+            )}
 
             {project_description && (
-              <p className="text-lg font-normal max-w-[741px] mb-11 md:mb-[70px] lg:mb-0">
+              <p className="text-2xl font-normal max-w-[741px] mb-11 md:mb-[70px] lg:mb-0">
                 {project_description}
               </p>
             )}
