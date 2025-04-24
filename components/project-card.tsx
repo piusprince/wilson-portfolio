@@ -231,7 +231,6 @@ export const ProjectCard = ({ blok }: ProjectProps) => {
                       <Link
                         key={link._uid}
                         href={getStoryblokLinkUrl(link.link)}
-                        target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Button
