@@ -25,18 +25,20 @@ export const Text = ({
   const formattedHtml = convertAttributesInElement(html);
 
   return (
-    <div
+    <section
       {...storyblokEditable(blok)}
       data-testid="text"
       id={blok._uid}
       className={clsx(
-        "w-full max-w-[1283px] mx-auto relative overflow-hidden",
+        "w-full max-w-[1283px] pl-4 pr-6 md:px-[50px] lg:px-0 mx-auto relative overflow-hidden",
         className
       )}
     >
       {formattedHtml && (
-        <div className="prose prose-lg max-w-none ">{formattedHtml}</div>
+        <div className="prose prose-lg max-w-none [&_*]:text-black">
+          {formattedHtml}
+        </div>
       )}
-    </div>
+    </section>
   );
 };
