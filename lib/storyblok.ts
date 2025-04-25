@@ -2,14 +2,14 @@ import { CaseStudyIntro } from "@/components/case-study-intro";
 import HeadlineBlok from "@/components/headline-blok";
 import { Hero } from "@/components/hero";
 import { ImageAtom } from "@/components/image";
-import { MarqueeProjects } from "@/components/marquee_projects";
+import { MarqueeProjects } from "@/components/marquee-projects";
 import PageTemplate from "@/components/pageTemplate";
 import { ProjectCard } from "@/components/project-card";
 import Quote from "@/components/quote";
 import { Text } from "@/components/text";
 import TextImageGrid from "@/components/text-image-grid";
-import { TextImage } from "@/components/text_image";
-import { TextMultiImage } from "@/components/text_multi_image";
+import { TextImage } from "@/components/text-image";
+import { TextMultiImage } from "@/components/text-multi-image";
 
 import {
   apiPlugin,
