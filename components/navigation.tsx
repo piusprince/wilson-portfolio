@@ -32,7 +32,7 @@ export default function Navigation({ blok }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full max-w-[1283px] container mx-auto py-[22px] px-[26px] lg:px-0  flex items-center justify-between">
+    <header className="w-full max-w-[1283px] container mx-auto py-[22px] px-[26px] xl:px-0  flex items-center justify-between">
       <div className="flex items-center">
         <Link href="/website" className="text-2xl font-bold">
           {blok.logo ? (
