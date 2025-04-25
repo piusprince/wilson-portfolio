@@ -50,7 +50,11 @@ export const CaseStudyIntro = ({ blok }: CaseStudyIntroBlok) => {
         )}
 
         {blok.case_study_text && (
-          <Text blok={textComponentBlok} className="mb-8 !px-0" />
+          <Text
+            blok={textComponentBlok}
+            hasMarginBottom={false}
+            className="mb-8 !px-0"
+          />
         )}
 
         <div className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-10 lg:gap-10 text-sm">
