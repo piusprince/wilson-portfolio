@@ -24,7 +24,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: "Wilson Oware Addo",
   description: "Senior Product Designer",
-  metadataBase: new URL("https://wilsonaddo.com/website"),
+  metadataBase: new URL("https://wilsonaddo.com"),
   openGraph: {
     title: "Wilson Oware Addo",
     description: "Senior Product Designer",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Wilson Oware Addo",
     images: [
       {
-        url: "https://wilsonaddo.com/website/og-image.jpg",
+        url: "/website/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Wilson Oware Addo - Senior Product Designer",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Wilson Oware Addo",
     description: "Senior Product Designer",
     creator: "@wilsonaddo",
-    images: ["https://wilsonaddo.com/website/og-image.jpg"],
+    images: ["/website/og-image.jpg"],
   },
 };
 

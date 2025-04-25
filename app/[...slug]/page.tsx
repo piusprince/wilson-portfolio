@@ -117,7 +117,7 @@ export async function generateMetadata({ params }: Props) {
     return {
       title,
       description,
-      metadataBase: new URL("https://wilsonaddo.com/website"),
+      metadataBase: new URL("https://wilsonaddo.com"),
       openGraph: {
         title,
         description,
