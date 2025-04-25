@@ -109,10 +109,38 @@ export async function generateMetadata({ params }: Props) {
       return {};
     }
 
+    const title = story.content.page_title ?? story.name ?? "Storyblok Page";
+    const description =
+      story.content.page_description ?? story.content?.description ?? "";
+    const ogImage = story.content.og_image?.filename ?? "/og-image.jpg";
+
     return {
-      title: story.content.page_title ?? story.name ?? "Storyblok Page",
-      description:
-        story.content.page_description ?? story.content?.description ?? "",
+      title,
+      description,
+      metadataBase: new URL("https://wilsonaddo.vercel.app"),
+      openGraph: {
+        title,
+        description,
+        url: `https://wilsonaddo.vercel.app/${fullSlug}`,
+        siteName: "Wilson Oware Addo",
+        images: [
+          {
+            url: ogImage,
+            width: 1200,
+            height: 630,
+            alt: title,
+          },
+        ],
+        locale: "en_US",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        creator: "@wilsonaddo",
+        images: [ogImage],
+      },
     };
   } catch (error) {
     console.error("Error fetching metadata:", error);
