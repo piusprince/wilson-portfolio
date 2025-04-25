@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Wilson Oware Addo",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://wilsonaddo.com/website/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Wilson Oware Addo - Senior Product Designer",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Wilson Oware Addo",
     description: "Senior Product Designer",
     creator: "@wilsonaddo",
-    images: ["/og-image.jpg"],
+    images: ["https://wilsonaddo.com/website/og-image.jpg"],
   },
 };
 
