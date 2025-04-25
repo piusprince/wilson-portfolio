@@ -27,7 +27,7 @@ export default function Quote({ blok }: QuoteProps) {
       {...storyblokEditable(blok)}
       data-testid="quote"
       id={blok._uid}
-      className="container mx-auto px-6 py-16 md:px-10"
+      className="container mx-auto px-6 pt-[94px] md:pt-[143px] xl:py-[187px] md:px-10"
     >
       <div className="max-w-3xl mx-auto text-center">
         {blok.text && (
