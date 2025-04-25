@@ -10,6 +10,7 @@ import { fetchHeader, StoryblokVersion } from "../_actions/fetchHeader";
 import Navigation from "@/components/navigation";
 import { fetchFooter } from "../_actions/fetchFooter";
 import Footer from "@/components/footer";
+import BackButton from "@/components/ui/back-button";
 
 interface Props {
   params: Promise<{
@@ -75,15 +76,8 @@ export default async function CatchAllPage({ params }: Props) {
             className="relative min-h-screen mx-auto"
             {...storyblokEditable(story.content)}
           >
-            <div className="relative max-w-[1283px] mx-auto pt-[3.8125rem] md:pt-[3.25rem] pb-8">
-              {!isHomePage && (
-                <button
-                  // onClick={() => window.history.back()}
-                  className="px-4 py-2 text-sm bg-white/80 hover:bg-white rounded-[30px] shadow-sm"
-                >
-                  ← Back
-                </button>
-              )}
+            <div className="relative max-w-[1283px] pl-4 md:pl-[50px] xl:px-0 mx-auto pt-[3.8125rem] md:pt-[3.25rem] pb-8">
+              {!isHomePage && <BackButton />}
             </div>
             <StoryblokServerComponent blok={story.content} />
           </main>
