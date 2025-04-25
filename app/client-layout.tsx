@@ -1,28 +1,38 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-
 import LoadingScreen from "@/components/loading-screen";
+import { setVisitedCookie } from "./_actions/setCookie";
 
 export default function ClientLayout({
+  hasVisited,
   children,
 }: {
+  hasVisited: boolean;
   children: React.ReactNode;
 }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasVisited);
+
+  useEffect(() => {
+    if (!hasVisited) {
+      setVisitedCookie();
+    }
+  }, [hasVisited]);
 
   return (
     <>
-      <LoadingScreen
-        onLoadingComplete={() => setLoading(false)}
-        duration={4000}
-        finalCount={100}
-      />
+      {!hasVisited && (
+        <LoadingScreen
+          onLoadingComplete={() => setLoading(false)}
+          duration={4000}
+          finalCount={100}
+        />
+      )}
 
       <AnimatePresence mode="wait">
-        {!loading && (
+        {(!loading || hasVisited) && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{
