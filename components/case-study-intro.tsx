@@ -38,7 +38,7 @@ export const CaseStudyIntro = ({ blok }: CaseStudyIntroBlok) => {
   return (
     <section
       {...storyblokEditable(blok)}
-      className="max-w-[1280px] mx-auto mb-[52px] pl-4 pr-6 lg:px-0"
+      className="max-w-[1280px] mx-auto mb-[52px] pl-4 pr-6 md:px-[50px] xl:px-0"
     >
       <div className="max-w-[693px]">
         {headlineBlok && (

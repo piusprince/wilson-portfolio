@@ -32,7 +32,7 @@ export const TextMultiImage = ({ blok }: TextMultiImageProps) => {
     <section
       {...storyblokEditable(blok)}
       className={clsx(
-        "flex flex-col max-w-[1283px] mx-auto w-full mb-[51px] md:mb-[41px] lg:mb-[72px] pl-4 pr-6 md:px-[50px] lg:px-0 gap-8",
+        "flex flex-col max-w-[1283px] mx-auto w-full mb-[51px] md:mb-[41px] lg:mb-[72px] pl-4 pr-6 md:px-[50px] xl:px-0 gap-8",
         {
           "flex-col": isTop,
           "flex-col-reverse": !isTop,
