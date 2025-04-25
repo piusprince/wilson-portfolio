@@ -117,15 +117,15 @@ export async function generateMetadata({ params }: Props) {
     return {
       title,
       description,
-      metadataBase: new URL("https://wilsonaddo.vercel.app"),
+      metadataBase: new URL("https://wilsonaddo.com/website"),
       openGraph: {
         title,
         description,
-        url: `https://wilsonaddo.vercel.app/${fullSlug}`,
+        url: `https://wilsonaddo.com/website/${fullSlug}`,
         siteName: "Wilson Oware Addo",
         images: [
           {
-            url: ogImage,
+            url: `/website/${ogImage}`,
             width: 1200,
             height: 630,
             alt: title,
@@ -139,7 +139,7 @@ export async function generateMetadata({ params }: Props) {
         title,
         description,
         creator: "@wilsonaddo",
-        images: [ogImage],
+        images: [`/website/${ogImage}`],
       },
     };
   } catch (error) {
