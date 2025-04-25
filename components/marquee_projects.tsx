@@ -41,7 +41,7 @@ export const MarqueeProjects = ({ blok }: MarqueeProjectsProps) => {
   return (
     <section
       {...storyblokEditable(blok)}
-      className="w-full mb-32 overflow-hidden"
+      className="w-screen mb-32 relative left-[50%] right-[50%] mx-[-50vw]"
     >
       <Marquee className="py-4" pauseOnHover>
         {projects &&

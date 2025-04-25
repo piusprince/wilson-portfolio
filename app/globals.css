@@ -163,13 +163,16 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   main {
     max-width: 1440px;
     margin: 0 auto;
+    position: relative;
+    overflow-x: visible;
   }
-
 
   h1 {
     font-size: var(--h1-size-mobile);

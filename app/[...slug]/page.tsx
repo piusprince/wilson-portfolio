@@ -71,7 +71,7 @@ export default async function CatchAllPage({ params }: Props) {
         {headerData && <Navigation blok={headerData.story.content} />}
         {story.content && (
           <main
-            className="container min-h-screen mx-auto"
+            className="relative min-h-screen mx-auto"
             {...storyblokEditable(story.content)}
           >
             <StoryblokServerComponent blok={story.content} />
