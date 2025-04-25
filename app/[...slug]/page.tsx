@@ -21,6 +21,7 @@ export default async function CatchAllPage({ params }: Props) {
   const fullSlug = (await params).slug ? (await params).slug.join("/") : "home";
   const isProduction = process.env.NODE_ENV === "production";
   const isDraftMode = (await draftMode()).isEnabled;
+  const isHomePage = fullSlug === "website";
 
   let storyblokVersion;
   switch (true) {
@@ -74,6 +75,16 @@ export default async function CatchAllPage({ params }: Props) {
             className="relative min-h-screen mx-auto"
             {...storyblokEditable(story.content)}
           >
+            <div className="relative max-w-[1283px] mx-auto pt-[3.8125rem] md:pt-[3.25rem] pb-8">
+              {!isHomePage && (
+                <button
+                  // onClick={() => window.history.back()}
+                  className="px-4 py-2 text-sm bg-white/80 hover:bg-white rounded-[30px] shadow-sm"
+                >
+                  ← Back
+                </button>
+              )}
+            </div>
             <StoryblokServerComponent blok={story.content} />
           </main>
         )}
